@@ -41,6 +41,16 @@ columns- name: string (primary key)
          Genre : string 
 
 
+
+# categories - the type of genre person like to watch 
+
+Table 5- Genre 
+model- genre 
+columns- name: string (primary key)
+         description: string
+
+
+
 # Associations - using has_many majorly to connect comment and rating table to user and movie. 
 
 
