@@ -1,7 +1,6 @@
 class Movie < ApplicationRecord
 
     has_one_attached :banner
-    belongs_to :admin
     has_many :ratings, dependent: :destroy
     has_many :comments, dependent: :destroy
     has_many :movie_genres, dependent: :destroy
