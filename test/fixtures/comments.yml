@@ -1,11 +1,24 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+comment_one:
+  user_id: 1
+  movie_id: 1
+  content: "Incredible visuals and storytelling."
 
-one:
-  user: one
-  movie: one
-  content: MyString
+comment_two:
+  user_id: 2
+  movie_id: 2
+  content: "Best performance by Heath Ledger!"
 
-two:
-  user: two
-  movie: two
-  content: MyString
+comment_three:
+  user_id: 2
+  movie_id: 4
+  content: "A touching and emotional journey."
+
+comment_four:
+  user_id: 1
+  movie_id: 5
+  content: "A masterpiece of modern cinema."
+
+comment_five:
+  user_id: 1
+  movie_id: 3
+  content: "A thrilling ride from start to finish."

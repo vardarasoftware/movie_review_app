@@ -1,7 +1,27 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+action:
+  id: 1
+  name: "Action"
 
-one:
-  name: MyString
+sci_fi:
+  id: 2
+  name: "Sci-Fi"
 
-two:
-  name: MyString
+drama:
+  id: 3
+  name: "Drama"
+
+romance:
+  id: 4
+  name: "Romance"
+
+comedy:
+  id: 5
+  name: "Comedy"
+
+horror:
+  id: 6
+  name: "Horror"
+
+thriller:
+  id: 7
+  name: "Thriller"

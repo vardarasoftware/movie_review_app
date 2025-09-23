@@ -51,7 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_19_090120) do
   create_table "comments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "movie_id", null: false
-    t.string "content"
+    t.string "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_comments_on_movie_id"
