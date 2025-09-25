@@ -1,11 +1,24 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+rating_one:
+  user_id: 1
+  movie_id: 1
+  rating: 4
 
-one:
-  user: one
-  movie: one
-  rating: 1
+rating_two:
+  user_id: 2
+  movie_id: 2
+  rating: 5
 
-two:
-  user: two
-  movie: two
-  rating: 1
+rating_three:
+  user_id: 1
+  movie_id: 3
+  rating: 3
+
+rating_four:
+  user_id: 2
+  movie_id: 5
+  rating: 4
+
+rating_five:
+  user_id: 1
+  movie_id: 4
+  rating: 5

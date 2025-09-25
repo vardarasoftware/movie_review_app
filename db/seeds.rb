@@ -1,9 +1,32 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Load all fixture files from test/fixtures
+require 'active_record/fixtures'
+require 'factory_bot_rails'
+
+# Clear existing data
+puts "Cleaning database..."
+[Admin, User, Movie, Genre, MovieGenre, Rating, Comment].each do |model|
+  model.destroy_all
+end
+
+# Load fixtures in specific order due to dependencies
+fixtures_path = Rails.root.join('test', 'fixtures')
+
+# Load fixtures in order
+fixture_tables = [
+  'admins',
+  'users',
+  'genres',
+  'movies',
+  'movie_genres',
+  'ratings',
+  'comments'
+]
+
+fixture_tables.each do |table|
+  puts "Loading #{table} fixtures..."
+  ActiveRecord::FixtureSet.create_fixtures(fixtures_path, table)
+end
+
+FactoryBot.create_list(:movie, 100)
+
+puts "Seed data loaded successfully!"

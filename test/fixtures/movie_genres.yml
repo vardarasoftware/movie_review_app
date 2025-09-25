@@ -1,9 +1,19 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+inception_action:
+  movie_id: 1
+  genre_id: 1
 
-one:
-  movie: one
-  genre: one
+inception_sci_fi:
+  movie_id: 1
+  genre_id: 2
 
-two:
-  movie: two
-  genre: two
+dark_knight_action:
+  movie_id: 2
+  genre_id: 1
+
+dark_knight_drama:
+  movie_id: 2
+  genre_id: 3
+
+interstellar_sci_fi:
+  movie_id: 3
+  genre_id: 2

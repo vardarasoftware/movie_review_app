@@ -1,21 +1,56 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyText
-  release_date: 2025-09-19
-  director: MyString
-  writer: MyString
-  banner_url: MyString
-  average_rating: 1.5
-  ratings_count: 1
+inception:
+  id: 1
+  title: "Inception"
+  description: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea."
+  release_date: 2010-07-16
+  director: "Christopher Nolan"
+  writer: "Christopher Nolan"
+  banner_url: "https://example.com/inception.jpg"
+  average_rating: 4
+  ratings_count: 2000
 
-two:
-  title: MyString
-  description: MyText
-  release_date: 2025-09-19
-  director: MyString
-  writer: MyString
-  banner_url: MyString
-  average_rating: 1.5
-  ratings_count: 1
+dark_knight:
+  id: 2
+  title: "The Dark Knight"
+  description: "Batman raises the stakes in his war on crime. With the help of allies, he sets out to dismantle the remaining criminal organizations."
+  release_date: 2008-07-18
+  director: "Christopher Nolan"
+  writer: "Jonathan Nolan"
+  banner_url: "https://example.com/dark_knight.jpg"
+  average_rating: 4.5
+  ratings_count: 2500
+
+matrix:
+  id: 3
+  title: "The Matrix"
+  description: "A computer hacker learns about the true nature of reality and his role in the war against its controllers."
+  release_date: 1999-03-31
+  director: "Lana Wachowski, Lilly Wachowski"
+  writer: "The Wachowskis"
+  banner_url: "https://example.com/matrix.jpg"
+  average_rating: 4.9
+  ratings_count: 1800
+
+interstellar:
+  id: 4
+  title: "Interstellar"
+  description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity’s survival."
+  release_date: 2014-11-07
+  director: "Christopher Nolan"
+  writer: "Jonathan Nolan, Christopher Nolan"
+  banner_url: "https://example.com/interstellar.jpg"
+  average_rating: 3
+  ratings_count: 2200
+
+parasite:
+  id: 5
+  title: "Parasite"
+  description: "A poor family schemes to become employed by a wealthy family and infiltrate their household."
+  release_date: 2019-05-30
+  director: "Bong Joon-ho"
+  writer: "Bong Joon-ho, Han Jin-won"
+  banner_url: "https://example.com/parasite.jpg"
+  average_rating: 2.5
+  ratings_count: 1700
