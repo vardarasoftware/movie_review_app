@@ -1,0 +1,36 @@
+<div class="admin-login-container">
+  <div class="admin-login-card">
+    <div class="admin-login-header">
+      <h1>Admin Login</h1>
+      <p>Sign in to your admin account</p>
+    </div>
+
+    <% if flash[:alert] %>
+      <div class="alert alert-danger">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+
+    <% if flash[:notice] %>
+      <div class="alert alert-success">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <%= form_with url: admin_login_path, method: :post, local: true, data: { turbo: false }, class: "admin-login-form" do |form| %>
+      <div class="form-group">
+        <%= label_tag :email, "Email", class: "form-label" %>
+        <%= text_field_tag :email, params[:email], placeholder: "Enter your email", class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= label_tag :password, "Password", class: "form-label" %>
+        <%= password_field_tag :password, nil, placeholder: "Enter your password", class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= submit_tag "Sign In", class: "btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>
