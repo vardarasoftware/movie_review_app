@@ -1,4 +1,6 @@
 require "administrate/base_dashboard"
+require "administrate/field/active_storage"
+require_relative "../fields/banner_field"
 
 class MovieDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -10,9 +12,7 @@ class MovieDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     average_rating: Field::Number.with_options(decimals: 2),
-    banner_attachment: Field::HasOne,
-    banner_blob: Field::HasOne,
-    banner_url: Field::String,
+    banner: BannerField,
     comments: Field::HasMany,
     description: Field::Text,
     director: Field::String,
@@ -35,6 +35,7 @@ class MovieDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     title
+    banner
     average_rating
     ratings_count
     release_date
@@ -45,9 +46,7 @@ class MovieDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     average_rating
-    banner_attachment
-    banner_blob
-    banner_url
+    banner
     comments
     description
     director
@@ -66,20 +65,13 @@ class MovieDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    average_rating
-    banner_attachment
-    banner_blob
-    banner_url
-    comments
+    title
     description
     director
-    genres
-    movie_genres
-    ratings
-    ratings_count
-    release_date
-    title
     writer
+    release_date
+    banner
+    genres
   ].freeze
 
   # COLLECTION_FILTERS
@@ -97,7 +89,7 @@ class MovieDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how movies are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(movie)
-  #   "Movie ##{movie.id}"
-  # end
+  def display_resource(movie)
+    movie.title
+  end
 end

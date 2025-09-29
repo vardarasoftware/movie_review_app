@@ -43,8 +43,6 @@ class GenreDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     name
-    movie_genres
-    movies
   ].freeze
 
   # COLLECTION_FILTERS
@@ -62,7 +60,7 @@ class GenreDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how genres are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(genre)
-  #   "Genre ##{genre.id}"
-  # end
+  def display_resource(genre)
+    genre.name
+  end
 end

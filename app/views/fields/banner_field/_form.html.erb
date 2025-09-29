@@ -1,0 +1,9 @@
+<div class="banner-field-form">
+  <%= f.file_field :banner, class: "form-control" %>
+  <% if field.attached? %>
+    <div class="current-banner">
+      <p>Current banner:</p>
+      <%= image_tag field.image_url, alt: field.filename, style: "max-width: 200px; height: auto;" %>
+    </div>
+  <% end %>
+</div>

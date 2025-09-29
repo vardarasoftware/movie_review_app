@@ -12,7 +12,8 @@ class UserDashboard < Administrate::BaseDashboard
     comments: Field::HasMany,
     email: Field::String,
     name: Field::String,
-    password: Field::String.with_options(searchable: false),
+    password: Field::String.with_options(searchable: false, type: :password),
+    password_confirmation: Field::String.with_options(searchable: false, type: :password),
     password_digest: Field::String,
     ratings: Field::HasMany,
     created_at: Field::DateTime,
@@ -52,6 +53,7 @@ class UserDashboard < Administrate::BaseDashboard
     name
     email
     password
+    password_confirmation
   ].freeze
 
   # COLLECTION_FILTERS
@@ -69,7 +71,7 @@ class UserDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+def display_resource(user)
+    user.name
+  end
 end
