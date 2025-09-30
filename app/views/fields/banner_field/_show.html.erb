@@ -1,0 +1,9 @@
+<% if field.attached? %>
+  <div class="banner-field">
+    <p><strong>Filename:</strong> <%= field.filename %></p>
+    <p><strong>Image:</strong></p>
+    <%= image_tag field.image_url, alt: field.filename, style: "max-width: 300px; height: auto;" %>
+  </div>
+<% else %>
+  <p>No banner attached</p>
+<% end %>

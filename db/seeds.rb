@@ -4,7 +4,7 @@ require 'factory_bot_rails'
 
 # Clear existing data
 puts "Cleaning database..."
-[Admin, User, Movie, Genre, MovieGenre, Rating, Comment].each do |model|
+[AdminUser, User, Movie, Genre, MovieGenre, Rating, Comment].each do |model|
   model.destroy_all
 end
 
@@ -13,7 +13,7 @@ fixtures_path = Rails.root.join('test', 'fixtures')
 
 # Load fixtures in order
 fixture_tables = [
-  'admins',
+  'admin_users',
   'users',
   'genres',
   'movies',
