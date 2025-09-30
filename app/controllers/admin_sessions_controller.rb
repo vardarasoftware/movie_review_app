@@ -1,47 +1,37 @@
 class AdminSessionsController < ApplicationController
+  include Authenticatable
+
   def new
-    # Debug: Clear any existing flash messages
     flash.clear
   end
 
   def create
-
-    email = params[:email]&.strip&.downcase
+    email = process_email(params[:email])
     password = params[:password]
 
-    #validate email
-    if email.blank?
-      flash.now[:alert] = "Email is required."
-      render :new
+    # Validate email and password
+    unless validate_email(email) && validate_password(password)
+      handle_authentication_failure
       return
     end
 
-    unless email.match?(/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i)
-      flash.now[:alert] = "Please enter a valid email address."
-      render :new and return
-    end
-
-    #validate password
-    if password.blank?
-      flash.now[:alert] = "Password is required."
-      render :new
-      return
-    end
-
-    # Use the processed email variable, not params[:email]
-    admin = AdminUser.find_by(email: email)
-
-    if admin&.authenticate(password) 
-      session[:admin_user_id] = admin.id
-      redirect_to admin_root_path, notice: "Logged in successfully."
+    # Authenticate user
+    if authenticate_user(AdminUser, email, password) do |admin|
+        handle_authentication_success(admin, admin_root_path)
+      end
     else
-      flash.now[:alert] = "Invalid email or password."
-      render :new
+      handle_authentication_failure
     end
   end
 
   def destroy
-    session[:admin_user_id] = nil
+    logout_user
     redirect_to admin_login_path, notice: "Logged out successfully."
+  end
+
+  private
+
+  def user_session_key
+    :admin_user_id
   end
 end

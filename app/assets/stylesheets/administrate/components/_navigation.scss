@@ -1,0 +1,59 @@
+$_navigation-link-padding: 0.6em;
+
+.navigation {
+  flex: 1 0 10rem;
+  padding: $base-spacing;
+  padding-left: 0;
+}
+
+.navigation__link {
+  background-color: transparent;
+  color: $base-font-color;
+  display: block;
+  line-height: 1;
+  margin-left: -($_navigation-link-padding);
+  padding: $_navigation-link-padding;
+  transition: background-color $base-duration $base-timing,
+              color $base-duration $base-timing;
+
+  &:not(:last-of-type) {
+    margin-bottom: $small-spacing;
+  }
+
+  &:hover {
+    background-color: mix($black, $base-background-color, 5%);
+    border-radius: $base-border-radius;
+    color: $base-font-color;
+  }
+}
+
+.navigation__link--active {
+  font-weight: $bold-font-weight;
+}
+
+.navigation__logout {
+  padding: $_navigation-link-padding;
+  margin-left: -($_navigation-link-padding);
+  //border-top: 1px solid #e5e5e5;
+}
+
+.logout-button {
+  color: red; 
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navigation__subtitle {
+  font-size: 0.8em;
+  font-weight: normal;
+  color: $grey-5;
+  text-align: center;
+  margin-bottom: $base-spacing;
+}
+
+.navigation__header {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: $base-font-color;
+  text-align: center;
+}
