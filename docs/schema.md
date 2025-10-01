@@ -84,3 +84,13 @@ belongs_to: movies
 
 
 
+Table 7- MovieGenre
+model- MovieGenre
+columns-
+id: int (primary key)
+movie_id: int
+genre_id: int
+
+
+
+
