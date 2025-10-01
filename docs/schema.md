@@ -95,3 +95,75 @@ genre_id: int
 
 
 
+# mermaid  
+
+erDiagram
+    USER {
+        int id PK
+        string name
+        string email
+        string password
+        datetime created_at
+        datetime updated_at
+    }
+
+    ADMINUSER {
+        int id PK
+        string name
+        string email
+        string password
+        datetime created_at
+        datetime updated_at
+    }
+
+    COMMENT {
+        int id PK
+        string content
+        int user_id FK
+        int movie_id FK
+    }
+
+    RATING {
+        int id PK
+        int user_rating
+        int user_id FK
+        int movie_id FK
+    }
+
+    MOVIE {
+        int id PK
+        string name
+        string description
+        date release_date
+        string director
+        string writers
+        string actors
+        string genre
+    }
+
+    GENRE {
+        int id PK
+        string name
+        string description
+    }
+
+    MOVIEGENRE {
+        int id PK
+        int movie_id FK
+        int genre_id FK
+    }
+
+    %% Relationships
+    USER ||--o{ COMMENT : "writes"
+    MOVIE ||--o{ COMMENT : "receives"
+
+    USER ||--o{ RATING : "gives"
+    MOVIE ||--o{ RATING : "has"
+
+    ADMINUSER ||--o{ MOVIE : "posts"
+
+    MOVIE ||--o{ MOVIEGENRE : "categorized"
+    GENRE ||--o{ MOVIEGENRE : "assigned"
+
+
+
