@@ -1,0 +1,54 @@
+<div class="movie-hero">
+  <div class="movie-hero-media">
+    <% if @movie.banner.attached? %>
+      <%= image_tag @movie.banner, alt: @movie.title, class: "movie-hero-img" %>
+    <% elsif @movie.banner_url.present? %>
+      <%= image_tag @movie.banner_url, alt: @movie.title, class: "movie-hero-img", onerror: "this.onerror=null;this.src='#{asset_path('placeholder_poster.png')}'" %>
+    <% else %>
+      <%= image_tag "placeholder_poster.png", alt: "No image", class: "movie-hero-img" %>
+    <% end %>
+    <div class="movie-hero-gradient"></div>
+    <div class="movie-hero-content">
+      <h1 class="movie-hero-title"><%= @movie.title %></h1>
+      <div class="movie-hero-meta">
+        <% if @movie.release_date.present? %>
+          <span class="badge"><%= @movie.release_date.year %></span>
+        <% end %>
+        <% if @movie.genres.loaded? || @movie.genres.exists? %>
+          <% @movie.genres.limit(3).pluck(:name).each do |g| %>
+            <span class="badge badge-outline"><%= g %></span>
+          <% end %>
+        <% end %>
+        <span class="badge badge-rating">⭐ <%= (@movie.average_rating || 0).to_f.round(1) %> (<%= (@movie.ratings_count || 0).to_i %>)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="movie-details">
+  <div class="movie-details-grid">
+    <div class="movie-details-main">
+      <h2>Overview</h2>
+      <div class="prose"><%= simple_format(@movie.description) %></div>
+    </div>
+    <aside class="movie-details-aside">
+      <dl class="definition-list">
+        <div class="definition-item">
+          <dt>Release date</dt>
+          <dd><%= @movie.release_date || '-' %></dd>
+        </div>
+        <div class="definition-item">
+          <dt>Director</dt>
+          <dd><%= @movie.director.presence || '-' %></dd>
+        </div>
+        <div class="definition-item">
+          <dt>Writer</dt>
+          <dd><%= @movie.writer.presence || '-' %></dd>
+        </div>
+      </dl>
+      <div class="movie-actions">
+        <%= link_to "Back to Movies", movies_path, class: "btn" %>
+      </div>
+    </aside>
+  </div>
+</section>

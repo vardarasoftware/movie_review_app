@@ -7,11 +7,26 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
+    <% if controller_path.start_with?("admin/") || controller_path == "admin_sessions" %>
+      <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
+    <% end %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header class="site-header">
+      <div class="container">
+        <a href="<%= root_path %>" class="brand">Movie Review</a>
+        <nav class="site-nav">
+          <%= link_to "Movies", movies_path, class: "nav-link" %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </main>
   </body>
 </html>
