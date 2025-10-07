@@ -1,0 +1,12 @@
+<h1>All Movies</h1>
+<%= link_to "Add New Movie", new_movie_path, class: "btn btn-primary" %>
+
+<ul> 
+    <% @movies.each do |movie| %>
+    <li>
+        <%= link_to movie.name, movie %>
+        (<%= link_to "Edit", edit_movie_path(movie) %>) |
+        <%= link_to "Delete", movie, method: :delete, data: {confirm: "Are you sure?" } %>
+        </li>
+        <% end %>
+        </ul> 
