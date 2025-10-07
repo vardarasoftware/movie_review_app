@@ -1,7 +1,7 @@
 class Movie < ApplicationRecord
   has_many :user 
   has_many :comment 
-  has_many :movie_genres 
+  belongs_to :genre 
   
 
   validate :name, presence: true 
