@@ -1,0 +1,9 @@
+<h1><%= @movie.name %></h1>
+<p><strong>Description:</strong> <%= @movie.description %></p>
+<p><strong>Release Year:</strong> <%= @movie.release_date %></p>
+<p><strong>Director:</strong> <%= @movie.director %></p>
+<p><strong>Writer:</strong> <%= @movie.writer %></p>
+<p><strong>Actor:</strong> <%= @movie.actor %></p>
+
+<%= link_to "Edit", edit_movie_path(@movie) %> |
+<%= link_to "Back", movies_path %>
