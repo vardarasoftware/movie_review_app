@@ -19,12 +19,25 @@
         <a href="<%= root_path %>" class="brand">Movie Review</a>
         <nav class="site-nav">
           <%= link_to "Movies", movies_path, class: "nav-link" %>
+          <% if user_signed_in? %>
+            <span class="nav-link">Hi, <%= current_user.name.presence || current_user.email %></span>
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link", form: { style: "display:inline" } %>
+          <% else %>
+            <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
+          <% end %>
         </nav>
       </div>
     </header>
 
     <main class="site-main">
       <div class="container">
+        <% if notice %>
+          <div class="flash notice"><%= notice %></div>
+        <% end %>
+        <% if alert %>
+          <div class="flash alert"><%= alert %></div>
+        <% end %>
         <%= yield %>
       </div>
     </main>

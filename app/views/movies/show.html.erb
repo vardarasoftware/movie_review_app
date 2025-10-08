@@ -30,6 +30,34 @@
     <div class="movie-details-main">
       <h2>Overview</h2>
       <div class="prose"><%= simple_format(@movie.description) %></div>
+
+      <h2 style="margin-top:16px">Comments</h2>
+      <div>
+        <% @movie.comments.order(created_at: :desc).each do |comment| %>
+          <div class="definition-list" style="margin:8px 0;">
+            <div class="definition-item">
+              <dt><%= comment.user.name.presence || comment.user.email %></dt>
+              <dd><%= comment.content %></dd>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <% if user_signed_in? %>
+        <%= form_with model: [@movie, Comment.new], local: true do |f| %>
+          <div class="definition-list" style="padding:12px; margin-top:8px;">
+            <div class="definition-item" style="grid-template-columns:120px 1fr; align-items:start;">
+              <dt>Your comment</dt>
+              <dd><%= f.text_area :content, rows: 3, required: true, style: "width:100%" %></dd>
+            </div>
+            <div style="text-align:right; margin-top:8px;">
+              <%= f.submit "Post Comment", class: "btn" %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p><%= link_to "Sign in", new_user_session_path %> to comment.</p>
+      <% end %>
     </div>
     <aside class="movie-details-aside">
       <dl class="definition-list">
@@ -48,6 +76,14 @@
       </dl>
       <div class="movie-actions">
         <%= link_to "Back to Movies", movies_path, class: "btn" %>
+        <% if user_signed_in? %>
+          <%= form_with model: [@movie, Rating.new], local: true, html: { style: "display:inline-block; margin-left:8px;" } do |f| %>
+            <%= f.number_field :rating, in: 1..5, step: 1, required: true, style: "width:64px;" %>
+            <%= f.submit "Rate", class: "btn" %>
+          <% end %>
+        <% else %>
+          <p style="margin-top:8px"><%= link_to "Sign in", new_user_session_path %> to rate.</p>
+        <% end %>
       </div>
     </aside>
   </div>
