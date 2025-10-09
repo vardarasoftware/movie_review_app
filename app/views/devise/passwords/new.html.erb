@@ -1,0 +1,32 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1 class="auth-title">Reset Password</h1>
+      <p class="auth-subtitle">Enter your email to receive reset instructions</p>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "auth-form" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="form-group">
+        <%= f.label :email, "Email Address", class: "form-label" %>
+        <%= f.email_field :email, 
+            class: "form-input", 
+            placeholder: "Enter your email address",
+            autofocus: true, 
+            autocomplete: "email" %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit "Send Reset Instructions", class: "btn btn-primary btn-full" %>
+      </div>
+    <% end %>
+
+    <div class="auth-footer">
+      <div class="auth-links">
+        <%= link_to "Back to Sign In", new_user_session_path, class: "auth-link" %>
+        <p>Don't have an account? <%= link_to "Sign up", new_user_registration_path, class: "auth-link" %></p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,257 @@
+/* Authentication Pages Styles */
+.auth-container {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.auth-header {
+  text-align: center;
+  padding: 32px 32px 24px;
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+  color: #fff;
+}
+
+.auth-title {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.auth-subtitle {
+  margin: 0;
+  color: #d1d5db;
+  font-size: 16px;
+}
+
+.auth-form {
+  padding: 32px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+}
+
+.form-hint {
+  color: #6b7280;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.form-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: #111827;
+}
+
+.form-checkbox-label {
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.form-actions {
+  margin-top: 24px;
+}
+
+.btn-full {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #111827;
+  color: #fff;
+  border: 2px solid #111827;
+}
+
+.btn-primary:hover {
+  background: #1f2937;
+  border-color: #1f2937;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(17, 24, 39, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-footer {
+  padding: 24px 32px 32px;
+  text-align: center;
+  background: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+.auth-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-link {
+  color: #111827;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.auth-link:hover {
+  color: #1f2937;
+  text-decoration: underline;
+}
+
+/* Error Messages */
+.error-messages {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.error-header h4 {
+  margin: 0 0 8px;
+  color: #991b1b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.error-list {
+  margin: 0;
+  padding-left: 16px;
+  color: #991b1b;
+  font-size: 14px;
+}
+
+.error-list li {
+  margin-bottom: 4px;
+}
+
+.field_with_errors .form-input {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.field_with_errors .form-label {
+  color: #dc2626;
+}
+
+/* Devise Links */
+.devise-links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.devise-link {
+  color: #111827;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 8px;
+  transition: color 0.2s ease;
+}
+
+.devise-link:hover {
+  color: #1f2937;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 20px 12px;
+  }
+  
+  .auth-card {
+    border-radius: 12px;
+  }
+  
+  .auth-header {
+    padding: 24px 20px 20px;
+  }
+  
+  .auth-title {
+    font-size: 24px;
+  }
+  
+  .auth-form {
+    padding: 24px 20px;
+  }
+  
+  .auth-footer {
+    padding: 20px;
+  }
+}
+
+/* Hide header on auth pages */
+.auth-layout .site-header {
+  display: none;
+}
+
+.auth-layout .site-main {
+  margin: 0;
+  padding: 0;
+}
+
+.auth-layout .container {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}

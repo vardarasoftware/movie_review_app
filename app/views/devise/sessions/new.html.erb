@@ -1,0 +1,47 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1 class="auth-title">Welcome Back</h1>
+      <p class="auth-subtitle">Sign in to your account</p>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form" }) do |f| %>
+      <div class="form-group">
+        <%= f.label :email, "Email Address", class: "form-label" %>
+        <%= f.email_field :email, 
+            class: "form-input", 
+            placeholder: "Enter your email",
+            autofocus: true, 
+            autocomplete: "email" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, "Password", class: "form-label" %>
+        <%= f.password_field :password, 
+            class: "form-input", 
+            placeholder: "Enter your password",
+            autocomplete: "current-password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-group form-group-inline">
+          <%= f.check_box :remember_me, class: "form-checkbox" %>
+          <%= f.label :remember_me, "Remember me", class: "form-checkbox-label" %>
+        </div>
+      <% end %>
+
+      <div class="form-actions">
+        <%= f.submit "Sign In", class: "btn btn-primary btn-full" %>
+      </div>
+    <% end %>
+
+    <div class="auth-footer">
+      <div class="auth-links">
+        <% if devise_mapping.recoverable? %>
+          <%= link_to "Forgot your password?", new_password_path(resource_name), class: "auth-link" %>
+        <% end %>
+        <p>Don't have an account? <%= link_to "Sign up", new_user_registration_path, class: "auth-link" %></p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -55,8 +55,6 @@
             </div>
           </div>
         <% end %>
-      <% else %>
-        <p><%= link_to "Sign in", new_user_session_path %> to comment.</p>
       <% end %>
     </div>
     <aside class="movie-details-aside">
@@ -81,10 +79,15 @@
             <%= f.number_field :rating, in: 1..5, step: 1, required: true, style: "width:64px;" %>
             <%= f.submit "Rate", class: "btn" %>
           <% end %>
-        <% else %>
-          <p style="margin-top:8px"><%= link_to "Sign in", new_user_session_path %> to rate.</p>
         <% end %>
       </div>
     </aside>
+
+    <% if user_signed_in? == false %>
+      <div class="auth-cta">
+        <p class="auth-cta-text">🎬 Please sign in or sign up to rate and comment on movies</p>
+        <%= link_to "Sign In / Sign Up", new_user_session_path, class: "auth-cta-btn" %>
+      </div>
+    <% end %>
   </div>
 </section>
