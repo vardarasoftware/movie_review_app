@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get    '/admin/login',  to: 'admin_sessions#new'
   post   '/admin/login',  to: 'admin_sessions#create'
   delete '/admin/logout', to: 'admin_sessions#destroy'
@@ -20,6 +21,9 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  resources :movies, only: [:index, :show] do
+    resources :comments, only: [:create]
+    resources :ratings, only: [:create]
+  end
+  root "movies#index"
 end

@@ -1,0 +1,31 @@
+<div class="movies-grid">
+  <% @movies.each do |movie| %>
+    <div class="movie-card imdb-card">
+      <%= link_to movie_path(movie), class: "movie-link" do %>
+        <div class="movie-banner imdb-poster">
+          <% if movie.banner.attached? %>
+            <%= image_tag movie.banner, alt: movie.title, class: "imdb-poster-img", loading: "lazy" %>
+          <% elsif movie.banner_url.present? %>
+            <%= image_tag movie.banner_url, alt: movie.title, class: "imdb-poster-img", loading: "lazy", onerror: "this.onerror=null;this.src='#{asset_path('placeholder_poster.png')}'" %>
+          <% else %>
+            <%= image_tag "placeholder_poster.png", alt: "No image", class: "imdb-poster-img", loading: "lazy" %>
+          <% end %>
+          <div class="imdb-gradient"></div>
+          <div class="imdb-rating-badge">⭐ <%= (movie.average_rating || 0).to_f.round(1) %> <span class="imdb-rating-count">(<%= (movie.ratings_count || 0).to_i %>)</span></div>
+        </div>
+        <div class="movie-body imdb-body">
+          <h3 class="movie-title imdb-title"><%= movie.title %></h3>
+          <div class="movie-meta imdb-meta">
+            <% if movie.release_date.present? %>
+              <span class="imdb-year"><%= movie.release_date.year %></span>
+            <% end %>
+            <% if movie.genres.loaded? || movie.genres.exists? %>
+              <span class="imdb-dot">•</span>
+              <span class="imdb-genres"><%= movie.genres.limit(2).pluck(:name).join(', ') %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

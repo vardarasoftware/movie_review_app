@@ -1,0 +1,182 @@
+/* Movies grid */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+.movie-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    transition: box-shadow .2s ease;
+}
+.movie-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.movie-link { color: inherit; text-decoration: none; display: block; height: 100%; }
+.movie-banner img, .movie-show-banner img { width: 100%; height: 300px; object-fit: cover; display: block; }
+.placeholder { height: 300px; display:flex; align-items:center; justify-content:center; color:#9ca3af; background:#f3f4f6; }  
+.movie-body { padding: 12px; }
+.movie-title { margin: 0 0 6px; font-size: 16px; line-height: 1.2; }
+.movie-desc { margin: 0 0 8px; color: #4b5563; font-size: 14px; }
+.movie-meta { font-size: 13px; color: #374151; }
+    
+/* IMDb-like cards */
+.imdb-card { padding-bottom: 0; border: none; background: transparent; }
+.imdb-poster { position: relative; border-radius: 10px; overflow: hidden; }
+.imdb-poster-img { width: 100%; height: 320px; object-fit: cover; display: block; }
+.imdb-gradient { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.0) 55%); }
+.imdb-rating-badge { position: absolute; left: 8px; bottom: 8px; background: rgba(17,24,39,0.85); color: #fff; padding: 4px 8px; border-radius: 9999px; font-size: 12px; display: inline-flex; align-items: center; gap: 4px; }
+.imdb-rating-count { color: #d1d5db; }
+.imdb-body { padding: 8px 2px 0; }
+.imdb-title { margin: 6px 0 2px; font-size: 16px; line-height: 1.2; color: #111827; }
+.imdb-meta { font-size: 12px; color: #6b7280; display: flex; align-items: center; gap: 6px; }
+.imdb-year { font-weight: 600; }
+.imdb-dot { color: #9ca3af; }
+.imdb-genres { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+
+    /* Show page */
+.movie-show { display: grid; gap: 16px; }
+.movie-show-body h1 { margin: 0 0 8px; }
+.movie-show-meta { display: flex; flex-wrap: wrap; gap: 12px; color: #374151; margin-bottom: 12px; }
+.movie-show-banner img { max-height: 420px; object-fit: cover; }
+    
+/* Base */
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color: #111827; background: #f9fafb; }
+
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 50; background: linear-gradient(90deg, #111827, #1f2937); color: #fff; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.site-header .container { max-width: 1100px; margin: 0 auto; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { font-weight: 700; font-size: 20px; color: #fff; text-decoration: none; letter-spacing: .3px; }
+.brand:hover { opacity: .9; }
+.site-nav { display: flex; gap: 12px; }
+.nav-link { color: #ebe5e5; text-decoration: none; font-weight: 500; }
+.nav-link:hover { color: #fff; }
+
+/* Content container */
+.site-main .container { max-width: 1100px; margin: 16px auto; padding: 0 16px; }
+
+/* Flash */
+.flash { padding: 10px 12px; border-radius: 8px; margin: 10px 0; font-weight: 600; }
+.flash.notice { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.flash.alert { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+/* Movie show - hero */
+.movie-hero { margin: 8px 0 20px; }
+.movie-hero-media { position: relative; border-radius: 12px; overflow: hidden; }
+.movie-hero-img { width: 100%; max-height: 460px; object-fit: cover; display: block; }
+.movie-hero-gradient { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.0) 55%); }
+.movie-hero-content { position: absolute; left: 16px; right: 16px; bottom: 16px; color: #fff; }
+.movie-hero-title { margin: 0 0 8px; font-size: 28px; line-height: 1.2; text-shadow: 0 2px 6px rgba(0,0,0,0.35); }
+.movie-hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Badges */
+.badge { display: inline-block; padding: 4px 8px; border-radius: 9999px; background: rgba(31,41,55,0.85); color: #fff; font-size: 12px; font-weight: 600; border: 1px solid rgba(255,255,255,0.12); }
+.badge-outline { background: rgba(255,255,255,0.08); color: #f3f4f6; border-color: rgba(255,255,255,0.2); }
+.badge-rating { background: #111827; color: #ffd166; border-color: #111827; }
+
+/* Movie details */
+.movie-details { margin: 8px 0 28px; }
+.movie-details-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
+.movie-details-main h2 { margin: 0 0 8px; font-size: 18px; }
+.prose p { margin: 0 0 10px; color: #374151; }
+
+.definition-list { margin: 0; padding: 12px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; }
+.definition-item { display: grid; grid-template-columns: 120px 1fr; align-items: center; padding: 8px 0; border-bottom: 1px dashed #e5e7eb; }
+.definition-item:last-child { border-bottom: none; }
+.definition-item dt { color: #6b7280; font-weight: 600; }
+.definition-item dd { margin: 0; color: #111827; }
+
+.movie-actions { margin-top: 12px; }
+.btn { display: inline-block; padding: 8px 12px; border-radius: 8px; background: #111827; color: #fff; text-decoration: none; font-weight: 600; border: 1px solid #111827; }
+.btn:hover { background: #1f2937; border-color: #1f2937; }
+
+@media (max-width: 920px) {
+  .movie-details-grid { grid-template-columns: 1fr; }
+}
+
+/* Red Logout Button */
+.logout-btn {
+  background: #dc2626 !important;
+  border: 1px solid #dc2626 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+  padding: 2px 2px !important;
+  margin: 0 !important;
+  border-radius: 4px !important;
+}
+
+.logout-btn:hover {
+  background: #b91c1c !important;
+  border-color: #b91c1c !important;
+  color: #fff !important;
+}
+
+/* .site-nav form {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+} */
+
+/* .site-nav form input[type="submit"] {
+  background: #dc2626 !important;
+  border: 1px solid #dc2626 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+  padding: 6px 12px !important;
+  margin: 0 !important;
+  border-radius: 4px !important;
+  transition: all 0.2s ease !important;
+} */
+
+/* .site-nav form input[type="submit"]:hover {
+  background: #b91c1c !important;
+  border-color: #b91c1c !important;
+  color: #fff !important;
+} */
+
+/* Sign-in CTA */
+.auth-cta {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border: 1px solid #374151;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.2);
+}
+
+.auth-cta-text {
+  margin: 0 0 10px;
+  color: #e5e7eb;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.auth-cta-btn {
+  display: inline-block;
+  padding: 8px 20px;
+  background: #fff;
+  color: #111827 !important;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border: 1px solid #fff;
+}
+
+.auth-cta-btn:hover {
+  background: #f3f4f6;
+  border-color: #f3f4f6;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.25);
+}
