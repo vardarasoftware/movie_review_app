@@ -1,0 +1,19 @@
+<h1>All Ratings<h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Rating</th>
+                <th>User_id</td>
+                <th>Movie_id</td>
+            </tr>
+        </thead>
+        <tbody>
+            <%@ratings.each do |rating| %>
+            <tr>
+                <td><%=rating.rating%></td>
+                <td><%=rating.user_id%></td>
+                <td><%=rating.movie_id%></td>
+            </tr>
+        </tbody>
+        <%end%>
+    </table>
