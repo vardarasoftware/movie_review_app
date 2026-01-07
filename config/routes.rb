@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :admins
+  resources :genres
   resources :ratings
   resources :comments
   resources :movies

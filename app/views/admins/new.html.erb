@@ -1,0 +1,13 @@
+<h1>New Admin<h1>
+    <%= form_with model: @admin do |form|%>
+    <div>
+        <%=form.label :name%>
+        <%=form.text_field :name%>
+    </div>
+    <div>
+        <%=form.label :email%>
+        <%=form.email_field :email%>
+    </div>
+    <%= form.submit "Create Admin"%>
+    <%= link_to "Back", admins_path%>
+    <%end%>
