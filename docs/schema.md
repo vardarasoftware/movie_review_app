@@ -28,3 +28,15 @@ columns- id:int(PK)
          rating:int
          user_id:int
          movie_id:int
+
+Table 5
+Admin
+columns- id:int(PK)
+         name:string
+         email:string
+         password:string
+
+Table 6
+Genre
+columns- id:int(PK)
+         name:string
