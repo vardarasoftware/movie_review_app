@@ -1,2 +1,16 @@
-<h1>Ratings#new</h1>
-<p>Find me in app/views/ratings/new.html.erb</p>
+<h1>New Rating<h1>
+    <%= form_with model: @rating do |form|%>
+    <div>
+        <%=form.label :rating%>
+        <%=form.text_field :rating%>
+    </div>
+    <div>
+        <%=form.label :user_id%>
+        <%=form.text_field :user_id%>
+    </div>
+    <div>
+        <%=form.label :movie_id%>
+        <%=form.text_field :movie_id%>
+    <%= form.submit "Create Rating"%>
+    <%= link_to "Back", ratings_path%>
+    <%end%>

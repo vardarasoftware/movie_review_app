@@ -13,7 +13,11 @@
                 <td><%=rating.rating%></td>
                 <td><%=rating.user_id%></td>
                 <td><%=rating.movie_id%></td>
+                <td><%= link_to "Show", rating %></td>
+                <td><%= link_to "Edit", edit_rating_path(rating) %></td>
+                <td><%= link_to "Destroy", rating, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
             </tr>
         </tbody>
         <%end%>
     </table>
+    <%= link_to "New Rating", new_rating_path %>
