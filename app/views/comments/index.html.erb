@@ -1,0 +1,23 @@
+<h1>List of comments</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Body :</th>
+            <th>User_id :</th>
+            <th>Movie_id :</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @comments.each do |comment| %>
+        <tr>
+            <td><%=comment.body%></td>
+            <td><%=comment.user_id%></td>
+            <td><%=comment.movie_id%></td>
+            <td><%= link_to "Show", comment %></td>
+            <td><%= link_to "Edit", edit_comment_path(comment) %></td>
+            <td><%= link_to "Destroy", comment, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
+        </tr>
+    </tbody>
+    <%end%>
+</table>
+<%=link_to "New Comment", new_comment_path%>

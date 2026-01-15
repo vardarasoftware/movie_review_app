@@ -1,0 +1,13 @@
+<h1>Genres :<h1>
+    <div>
+        <%@genre.each do |genre|%>
+        <div>
+            <%= genre.name %>
+            <%= link_to "Show", genre%>
+            <%= link_to "Edit", edit_genre_path(genre)%>
+            <%= link_to "Destroy", genre, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
+        </div>
+        <% end %>
+    </div>
+    <%= link_to "New Genre", new_genre_path%>
+        

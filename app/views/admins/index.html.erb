@@ -1,0 +1,13 @@
+<h1>Admins<h1>
+    <div>
+        <%@admin.each do |admin| %>
+        <div>
+            <%=admin.name%>
+        </div>
+        <%= link_to "Show", admin%>
+        <%= link_to "Edit", edit_admin_path(admin)%>
+        <%= link_to "Destroy", admin, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        <%end%>
+    </div>
+    <div>
+        <%= link_to "New", new_admin_path%>

@@ -1,0 +1,9 @@
+<h1>New Genre<h1>
+    <%= form_with model: @genre do |form|%>
+    <div>
+        <%=form.label :name%>
+        <%=form.text_field :name%>
+    </div>
+    <%= form.submit "Create Genre"%>
+    <%= link_to "Back", genres_path%>
+    <%end%>
