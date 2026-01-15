@@ -1,4 +1,8 @@
 <h1>Movie Details<h1>
+    <div>
+        <% if @movie.avatar.attached?%>
+        <%= image_tag @movie.avatar%>
+    </div>
     <strong>Title :</strong>
     <%=@movie.title%><br>
     <strong>Discription :</strong>
@@ -6,4 +10,5 @@
     <strong>Genre :</strong>
     <%=@movie.genre_id%><br>
     <%= link_to "Back", movies_path%>
+    <%end%>
     

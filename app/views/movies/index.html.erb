@@ -4,6 +4,7 @@
             <tr>
                 <th>Title</th>
                 <th>Discription</th>
+                <th>Avatar</th>
             </tr>
         </thead>
         <tbody>
@@ -11,6 +12,7 @@
         <tr>
             <td><%=movie.title%></td>
             <td><%=movie.discription%></td>
+            <td><%= image_tag movie.avatar.variant(:thumb)%></td>
             <td><%= link_to "Show", movie %></td>
             <td><%= link_to "Edit", edit_movie_path(movie) %></td>
             <td><%= link_to "Destroy", movie, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
