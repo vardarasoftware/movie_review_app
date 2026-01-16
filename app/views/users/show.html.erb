@@ -7,10 +7,5 @@
         <strong>Email</strong>
         <%=@user.email%>
     </p>
-    <p>
-        <% if @user.avatar.attached?%>
-        <%= image_tag @user.avatar%>
-        <%end%>
-    </p>
     <%= link_to "Back", users_path%>
     
