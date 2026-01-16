@@ -17,9 +17,8 @@
         <td><%= movie.discription %></td>
 
         <td>
-          <%= image_tag url_for(movie.avatar), style: "width: 120px; height: 200px; object-fit: cover;" if movie.avatar.attached? %>
+            <%= image_tag movie.avatar.variant(resize_to_limit: [200, 200]) if movie.avatar.attached? %>
         </td>
-
         <td><%= link_to "Show", movie %></td>
         <td><%= link_to "Edit", edit_movie_path(movie) %></td>
         <td><%= link_to "Destroy", movie, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>

@@ -1,7 +1,7 @@
 <h1>Movie Details<h1>
     <div>
         <% if @movie.avatar.attached?%>
-        <%= image_tag @movie.avatar, style: "width: 550px; height: 700px; object-fit: cover;"%>
+        <%= image_tag @movie.avatar%>
     </div>
     <strong>Title :</strong>
     <%=@movie.title%><br>
