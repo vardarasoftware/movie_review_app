@@ -41,10 +41,10 @@ class UsersController < ApplicationController
   
   private
   def user_path
-    params.require(:user).permit(:title, :body)
+    params.require(:user).permit(:title, :body,)
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password,)
   end
 end
