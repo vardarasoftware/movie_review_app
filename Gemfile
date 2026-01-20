@@ -8,6 +8,9 @@ gem "rails", "~> 7.1.5", ">= 7.1.5.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+# Add devise gem for user authentication
+gem "devise"
+
 #Image_processing get
 gem "image_processing", "~> 1.2"
 
