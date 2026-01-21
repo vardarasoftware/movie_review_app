@@ -1,7 +1,58 @@
-<% if user_signed_in? %>
-  Welcome, <%= current_user.name %> |
-  <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %>
-<% else %>
-  <%= link_to "Sign Up", new_user_registration_path %> |
-  <%= link_to "Login", new_user_session_path %>
-<% end %>
+<div style="padding:15px; background:#f5f7fa; border-radius:8px; font-family:Arial; text-align:right;">
+
+  <% if user_signed_in? %>
+
+    <span style="font-size:16px; color:#333;">
+      Welcome,
+      <strong style="color:#007bff;"><%= current_user.name %></strong>
+    </span>
+    |
+
+    <%= link_to "Logout",
+        destroy_user_session_path,
+        data: { turbo_method: :delete },
+        style: "margin-left:10px; padding:6px 14px; background:#dc3545; color:white; text-decoration:none; border-radius:5px;",
+        onmouseover: "this.style.background='#b52a37'",
+        onmouseout: "this.style.background='#dc3545'" %>
+
+  <% else %>
+
+    <%= link_to "Sign Up",
+        new_user_registration_path,
+        style: "padding:6px 14px; background:#28a745; color:white; text-decoration:none; border-radius:5px; margin-right:8px;",
+        onmouseover: "this.style.background='#1e7e34'",
+        onmouseout: "this.style.background='#28a745'" %>
+
+    <%= link_to "Login",
+        new_user_session_path,
+        style: "padding:6px 14px; background:#007bff; color:white; text-decoration:none; border-radius:5px;",
+        onmouseover: "this.style.background='#0056b3'",
+        onmouseout: "this.style.background='#007bff'" %>
+
+  <% end %>
+
+</div>
+
+<h1>Movies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Avatar</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= movie.title %></td>
+        <td><%= movie.discription %></td>
+        <td>
+          <%= image_tag movie.avatar.variant(resize_to_limit: [200, 200]) if movie.avatar.attached? %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
