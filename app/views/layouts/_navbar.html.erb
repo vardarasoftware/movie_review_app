@@ -55,20 +55,13 @@
 
   <!-- RIGHT -->
   <div style="display:flex; align-items:center; gap:25px;">
-    <%= link_to "Sign In", "#", style: "
-      color:#e5e7eb;
-      text-decoration:none;
-      font-size:15px;
-    " %>
-
-    <%= link_to "Sign Up", "#", style: "
-      background:#22c55e;
-      color:white;
-      padding:9px 18px;
-      border-radius:6px;
-      text-decoration:none;
-      font-weight:600;
-    " %>
+    <% if user_signed_in? %>
+      Welcome, <%= current_user.name %> |
+      <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %>
+    <% else %>
+      <%= link_to "Sign Up", new_user_registration_path %> |
+      <%= link_to "Login", new_user_session_path %>
+    <% end %>
   </div>
 
 </nav>

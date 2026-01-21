@@ -1,65 +1,7 @@
-<div style="
-  max-width:1100px;
-  margin:40px auto;
-  font-family:Segoe UI, Arial, sans-serif;
-">
-
-  <h1 style="
-    text-align:center;
-    margin-bottom:40px;
-    font-size:32px;
-    color:#111827;
-    letter-spacing:1px;
-  ">
-    🎬 Movie List
-  </h1>
-
-  <table style="
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    box-shadow:0 10px 25px rgba(0,0,0,0.1);
-    border-radius:10px;
-    overflow:hidden;
-  ">
-
-    <thead style="background:#111827; color:white;">
-      <tr>
-        <th style="padding:16px; text-align:left;">Movie Name</th>
-        <th style="padding:16px; text-align:center;">Poster</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @movies.each do |movie| %>
-        <tr style="border-bottom:1px solid #e5e7eb;">
-
-          <td style="
-            padding:18px;
-            font-size:16px;
-            font-weight:600;
-            color:#1f2933;
-          ">
-            <%= movie.title %>
-          </td>
-
-          <td style="padding:18px; text-align:center;">
-            <% if movie.avatar.attached? %>
-              <%= image_tag movie.avatar.variant(resize_to_limit: [250, 300]),
-                  style: "
-                    border-radius:10px;
-                    box-shadow:0 8px 18px rgba(0,0,0,0.25);
-                  "
-              %>
-            <% else %>
-              <span style="color:#9ca3af;">No Image</span>
-            <% end %>
-          </td>
-
-        </tr>
-      <% end %>
-    </tbody>
-
-  </table>
-
-</div>
+<% if user_signed_in? %>
+  Welcome, <%= current_user.name %> |
+  <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %>
+<% else %>
+  <%= link_to "Sign Up", new_user_registration_path %> |
+  <%= link_to "Login", new_user_session_path %>
+<% end %>
