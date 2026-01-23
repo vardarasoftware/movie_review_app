@@ -15,7 +15,11 @@
     <div>
         <%= form.label :genre%>
         <%= form.text_field :genre_id%>
-        </div>
+    </div>
+    <div>
+    <%= form.label :rating %>
+    <%= form.number_field :rating, in: 1..5 %><br>
+    </div>
     <%= form.submit "Create Movie"%>
-    <%= link_to "Back", movies_path%>
+    <%= link_to "Back", admins_path%>
     <%end%>

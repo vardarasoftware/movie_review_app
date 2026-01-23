@@ -1,30 +1,102 @@
-<h1>Movies</h1>
+<!-- TOP NAVBAR -->
 
-<table>
+<div style="
+  padding:15px 25px;
+  background:#f5f7fa;
+  border-radius:8px;
+  font-family:Arial;
+  text-align:right;
+  margin-bottom:25px;
+  border:1px solid #ddd;
+">
+
+<% if user_signed_in? %>
+
+<span style="font-size:16px; color:#333;">
+  Welcome,
+  <strong style="color:#2563eb;"><%= current_user.name %></strong>
+</span>
+
+<%= link_to "Logout",
+    destroy_user_session_path,
+    data: { turbo_method: :delete },
+    style: "margin-left:15px; padding:7px 16px; background:#dc3545; color:white; text-decoration:none; border-radius:5px; font-size:14px;",
+    onmouseover: "this.style.background='#b52a37'",
+    onmouseout: "this.style.background='#dc3545'" %>
+
+<% else %>
+
+<%= link_to "Sign Up",
+    new_user_registration_path,
+    style: "padding:7px 16px; background:#28a745; color:white; text-decoration:none; border-radius:5px; margin-right:8px; font-size:14px;",
+    onmouseover: "this.style.background='#1e7e34'",
+    onmouseout: "this.style.background='#28a745'" %>
+
+<%= link_to "Login",
+    new_user_session_path,
+    style: "padding:7px 16px; background:#2563eb; color:white; text-decoration:none; border-radius:5px; font-size:14px;",
+    onmouseover: "this.style.background='#1d4ed8'",
+    onmouseout: "this.style.background='#2563eb'" %>
+
+<% end %>
+
+</div>
+
+<!-- PAGE TITLE -->
+
+<h1 style="
+  text-align:center;
+  font-family:Arial;
+  margin-bottom:20px;
+  color:#1f2937;
+">
+  Movies
+</h1>
+
+<!-- MOVIES TABLE -->
+
+<table style="
+  width:100%;
+  border-collapse:collapse;
+  font-family:Arial;
+  background:white;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+">
+
   <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Avatar</th>
-      <th colspan="3">Actions</th>
+    <tr style="background:#2563eb; color:white;">
+      <th style="padding:12px; text-align:left;">Title</th>
+      <th style="padding:12px; text-align:left;">Discription</th>
+      <th style="padding:12px; text-align:center;">Avatar</th>
     </tr>
   </thead>
 
   <tbody>
     <% @movies.each do |movie| %>
-      <tr>
-        <td><%= movie.title %></td>
-        <td><%= movie.discription %></td>
+      <tr style="border-bottom:1px solid #e5e7eb;">
 
-        <td>
-            <%= image_tag movie.avatar.variant(resize_to_limit: [200, 200]) if movie.avatar.attached? %>
-        </td>
-        <td><%= link_to "Show", movie %></td>
-        <td><%= link_to "Edit", edit_movie_path(movie) %></td>
-        <td><%= link_to "Destroy", movie, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
-      </tr>
-    <% end %>
+    <td style="padding:12px; color:#111827;">
+      <%= movie.title %>
+    </td>
+
+    <td style="padding:12px; color:#374151;">
+      <%= movie.discription %>
+    </td>
+
+    <td style="padding:12px; text-align:center;">
+      <% if movie.avatar.attached? %>
+        <%= image_tag movie.avatar.variant(resize_to_limit: [120, 120]),
+            style: "border-radius:6px; border:1px solid #ddd;" %>
+      <% else %>
+        <span style="color:#9ca3af;">No Image</span>
+      <% end %>
+    </td>
+
+  </tr>
+<% end %>
+
   </tbody>
-</table>
 
-<%= link_to "New Movie", new_movie_path %>
+</table>

@@ -1,33 +1,34 @@
 class AdminsController < ApplicationController
+  before_action :authenticate_user!
   def index
-    @admin = Admin.all
+    @movies = Movie.all
   end
 
   def show
-    @admin = Admin.find(params[:id])
+    @movie = Movie.find(params[:id])
   end
 
   def new
-    @admin = Admin.new
+    @movie = Movie.new
   end
 
   def create
-    @admin = Admin.new(admin_params)
-    if @admin.save
-      redirect_to @admin, notice: "admin created successfully."
+    @movie = Movie.new(admin_params)
+    if @movie.save
+      redirect_to @movie, notice: "movie created successfully."
     else
       render :new
     end
   end
 
   def edit
-    @admin = Admin.find(params[:id])
+    @movie = Movie.find(params[:id])
   end
 
   def update
-    @admin = Admin.find(params[:id])
-    if @admin.update(admin_params)
-      redirect_to @admin, notice: "admin updated successfully."
+    @movie = Movie.find(params[:id])
+    if @movie.update(admin_params)
+      redirect_to @movie, notice: "movie updated successfully."
     else
       render :edit
     end
@@ -35,18 +36,18 @@ class AdminsController < ApplicationController
 
 
   def destroy
-    @admin = Admin.find(params[:id])
-    @admin.destroy
-    redirect_to admins_path, notice: "admin deleted successfully."
+    @movie = Movie.find(params[:id])
+    @movie.destroy
+    redirect_to admins_path, notice: "movie deleted successfully."
   end
 
   private
   def admin_params
-    params.require(:admin).permit(:name, :email, :password)
+    params.require(:movie).permit(:title, :discription)
   end
 
   def admin_path
-    params.require(:admin).permit(:title, :body)
+    params.require(:movie).permit(:avatar, :title, :discription, :genre_id)
   end
 end
 
