@@ -1,13 +1,100 @@
-<h1>Admins<h1>
-    <div>
-        <%@admin.each do |admin| %>
-        <div>
-            <%=admin.name%>
-        </div>
-        <%= link_to "Show", admin%>
-        <%= link_to "Edit", edit_admin_path(admin)%>
-        <%= link_to "Destroy", admin, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-        <%end%>
-    </div>
-    <div>
-        <%= link_to "New", new_admin_path%>
+<!-- PAGE TITLE -->
+
+<h1 style="
+  text-align:center;
+  font-family:Arial;
+  margin-bottom:25px;
+  color:#1f2937;
+">
+  Movies
+</h1>
+<div>
+  <%= link_to "Logout",
+    destroy_user_session_path,
+    data: { turbo_method: :delete },
+    style: "margin-left:15px; padding:7px 16px; background:#dc3545; color:white; text-decoration:none; border-radius:5px; font-size:14px;",
+    onmouseover: "this.style.background='#b52a37'",
+    onmouseout: "this.style.background='#dc3545'" %>
+  <div>
+
+<!-- NEW MOVIE BUTTON -->
+
+<div style="text-align:right; margin-bottom:15px;">
+  <%= link_to "➕ New Movie", new_movie_path,
+      style: "background:#16a34a; color:white; padding:8px 18px; text-decoration:none; border-radius:6px; font-family:Arial; font-size:14px;" %>
+</div>
+
+<!-- MOVIES TABLE -->
+
+<table style="
+  width:100%;
+  border-collapse:collapse;
+  font-family:Arial;
+  background:white;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+">
+
+  <thead>
+    <tr style="background:#2563eb; color:white;">
+      <th style="padding:12px; text-align:left;">Title</th>
+      <th style="padding:12px; text-align:left;">Description</th>
+      <th style="padding:12px; text-align:center;">Avatar</th>
+      <th style="padding:12px; text-align:center;">Rating</th>
+      <th style="padding:12px; text-align:center;" colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movies.each do |movie| %>
+      <tr style="border-bottom:1px solid #e5e7eb;">
+
+    <!-- TITLE -->
+    <td style="padding:12px; color:#111827;">
+      <%= movie.title %>
+    </td>
+
+    <!-- DESCRIPTION -->
+    <td style="padding:12px; color:#374151;">
+      <%= movie.discription %>
+    </td>
+
+    <!-- AVATAR -->
+    <td style="padding:12px; text-align:center;">
+      <% if movie.avatar.attached? %>
+        <%= image_tag movie.avatar.variant(resize_to_limit: [120, 120]),
+            style: "border-radius:6px; border:1px solid #ddd;" %>
+      <% else %>
+        <span style="color:#9ca3af;">No Image</span>
+      <% end %>
+    </td>
+
+    <!-- RATING -->
+    <td style="padding:12px; text-align:center; font-weight:bold;">
+      <%= movie.rating&.rating || "Not rated" %>
+    </td>
+
+    <!-- ACTIONS -->
+    <td style="padding:12px; text-align:center;">
+      <%= link_to "Show", movie,
+          style: "background:#0ea5e9; color:white; padding:6px 12px; border-radius:5px; text-decoration:none; font-size:13px;" %>
+    </td>
+
+    <td style="padding:12px; text-align:center;">
+      <%= link_to "Edit", edit_movie_path(movie),
+          style: "background:#f59e0b; color:white; padding:6px 12px; border-radius:5px; text-decoration:none; font-size:13px;" %>
+    </td>
+
+    <td style="padding:12px; text-align:center;">
+      <%= link_to "Delete", movie,
+          data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+          style: "background:#dc2626; color:white; padding:6px 12px; border-radius:5px; text-decoration:none; font-size:13px;" %>
+    </td>
+
+  </tr>
+<% end %>
+
+  </tbody>
+
+</table>

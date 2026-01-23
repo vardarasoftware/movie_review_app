@@ -3,7 +3,7 @@
   <head>
     <title>MovieReviewApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= render "layouts/navbar" %>
+    
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,6 +12,35 @@
   </head>
 
   <body>
+    <% if notice.present? %>
+
+  <p style="
+    background:#dcfce7;
+    color:#166534;
+    padding:12px 18px;
+    border-radius:6px;
+    margin-bottom:15px;
+    font-family:Arial;
+    border:1px solid #86efac;
+  ">
+    <%= notice %>
+  </p>
+<% end %>
+
+<% if alert.present? %>
+
+  <p style="
+    background:#fee2e2;
+    color:#991b1b;
+    padding:12px 18px;
+    border-radius:6px;
+    margin-bottom:15px;
+    font-family:Arial;
+    border:1px solid #fca5a5;
+  ">
+    <%= alert %>
+  </p>
+<% end %>
     <%= yield %>
   </body>
 </html>

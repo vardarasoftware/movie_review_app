@@ -1,11 +1,16 @@
-<h1>Admin Details <h1>
+<h1>Movie Details<h1>
     <div>
-        <strong>Name :</strong>
-        <%= @admin.name %>
+        <% if @movie.avatar.attached?%>
+        <%= image_tag @movie.avatar%>
     </div>
-    <div>
-        <strong>Email :</strong>
-        <%= @admin.email %>
-    </div>
-    <div>
-        <%= link_to "Back", admins_path %>
+    <strong>Title :</strong>
+    <%=@movie.title%><br>
+    <strong>Discription :</strong>
+    <%=@movie.discription%><br>
+    <strong>Genre :</strong>
+    <%=@movie.genre_id%><br>
+    <strong>Rating :</strong><br>
+    <%= @movie.rating_id%>
+    <%= link_to "Back", admins_path%>
+    <%end%>
+    
