@@ -11,6 +11,10 @@ gem "sprockets-rails"
 # Add devise gem for user authentication
 gem "devise"
 
+# Add activeadmin gem for admin dashboard
+gem "activeadmin"
+gem "sassc-rails"
+
 #Image_processing get
 gem "image_processing", "~> 1.2"
 
