@@ -1,18 +1,23 @@
-<h1>Movie Details<h1>
-    <div>
-        <% if @movie.avatar.attached?%>
-        <%= image_tag @movie.avatar%>
-    </div>
+<h1>Movie Details</h1>
+    <p>
+        <strong>Poster:</strong><br>
+         <% if @movie.avatar.attached? %>
+         <%= image_tag @movie.avatar.variant(resize_to_limit: [300, 300]) %>
+         <% else %>
+         No image uploaded
+        <% end %>
+    </p>
     <strong>Title :</strong>
     <%=@movie.title%><br>
+
     <strong>Discription :</strong>
     <%=@movie.discription%><br>
+
     <strong>Genre :</strong>
     <%=@movie.genre_id%><br>
+
     <div>
     <strong>Rating :<strong>
     <%= @movie.rating&.rating || "Not rated yet" %>
     </div>
-    <%= link_to "Back", admins_path%>
-    <%end%>
-    
+    <%= link_to "Back", movies_path%>

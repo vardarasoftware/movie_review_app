@@ -1,119 +1,74 @@
-<!-- TOP NAVBAR -->
-
-<div style="
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 25px;
-  background:#f8fafc;
-  border-radius:8px;
-  font-family:Arial;
-  margin-bottom:30px;
-  border:1px solid #e5e7eb;
-">
-
-  <div style="font-size:18px; font-weight:bold; color:#1f2937;">
-    🎬 Movie Review App
+<div>
+  <div>
+     Movie Review App
   </div>
 
   <div>
     <% if user_signed_in? %>
 
-  <span style="font-size:15px; color:#374151; margin-right:10px;">
-    Welcome,
-    <strong style="color:#2563eb;"><%= current_user.name %></strong>
-  </span>
+      <span>
+        Welcome,
+        <strong><%= current_user.name %></strong>
+      </span>
 
-  <%= link_to "Logout",
-      destroy_user_session_path,
-      data: { turbo_method: :delete },
-      style: "padding:7px 16px; background:#dc2626; color:white; text-decoration:none; border-radius:6px; font-size:14px;" %>
+      <%= link_to "Logout",
+          destroy_user_session_path,
+          data: { turbo_method: :delete } %>
 
-<% else %>
+    <% else %>
 
-  <%= link_to "Sign Up",
-      new_user_registration_path,
-      style: "padding:7px 16px; background:#16a34a; color:white; text-decoration:none; border-radius:6px; margin-right:8px; font-size:14px;" %>
+      <%= link_to "Sign Up", new_user_registration_path %>
+      <%= link_to "Login", new_user_session_path %>
 
-  <%= link_to "Login",
-      new_user_session_path,
-      style: "padding:7px 16px; background:#2563eb; color:white; text-decoration:none; border-radius:6px; font-size:14px;" %>
-
-<% end %>
-
+    <% end %>
   </div>
 </div>
 
-<!-- PAGE TITLE -->
+<hr>
 
-<h1 style="
-  text-align:center;
-  font-family:Arial;
-  margin-bottom:25px;
-  color:#111827;
-">
-  Movies
-</h1>
+<h1>Movies</h1>
 
-<!-- MOVIES TABLE -->
 
-<table style="
-  width:100%;
-  border-collapse:collapse;
-  font-family:Arial;
-  background:white;
-  border-radius:10px;
-  overflow:hidden;
-  box-shadow:0 6px 15px rgba(0,0,0,0.08);
-">
-
+<table>
   <thead>
-    <tr style="background:#2563eb; color:white;">
-      <th style="padding:14px; text-align:left;">Title</th>
-      <th style="padding:14px; text-align:left;">Description</th>
-      <th style="padding:14px; text-align:center;">Rating</th>
-      <th style="padding:14px; text-align:left;">Latest Comment</th>
-      <th style="padding:14px; text-align:center;">Poster</th>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Rating</th>
+      <th>Latest Review</th>
+      <th>Poster</th>
     </tr>
   </thead>
 
   <tbody>
     <% @movies.each do |movie| %>
-      <tr style="border-bottom:1px solid #e5e7eb;">
+      <tr>
 
-    <!-- TITLE -->
-    <td style="padding:14px; font-weight:bold; color:#111827;">
-      <%= movie.title %>
-    </td>
+        <td>
+          <%= movie.title %>
+        </td>
 
-    <!-- DESCRIPTION -->
-    <td style="padding:14px; color:#374151;">
-      <%= movie.discription %>
-    </td>
+        <td>
+          <%= movie.discription %>
+        </td>
 
-    <!-- RATING -->
-    <td style="padding:14px; text-align:center; font-weight:bold; color:#0f172a;">
-      <%= movie.rating&.rating || "—" %>
-    </td>
+        <td>
+          <%= movie.rating&.rating || "Not rated" %>
+        </td>
 
-    <!-- COMMENT -->
-    <td style="padding:14px; color:#374151;">
-      <%= movie.comments.last&.body || "No comments yet" %>
-    </td>
+        <td>
+          <%= movie.reviews.last&.body || "No comments yet" %>
+        </td>
 
-    <!-- IMAGE -->
-    <td style="padding:14px; text-align:center;">
-      <% if movie.avatar.attached? %>
-        <%= image_tag movie.avatar.variant(resize_to_limit: [110, 110]),
-            style: "border-radius:8px; border:1px solid #e5e7eb;" %>
-      <% else %>
-        <span style="color:#9ca3af;">No Image</span>
-      <% end %>
-    </td>
+        <td>
+          <% if movie.avatar.attached? %>
+            <%= image_tag movie.avatar.variant(resize_to_limit: [110, 110]) %>
+          <% else %>
+            No Image
+          <% end %>
+        </td>
 
-  </tr>
-<% end %>
-
+      </tr>
+    <% end %>
   </tbody>
-
 </table>
