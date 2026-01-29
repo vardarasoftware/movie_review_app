@@ -1,5 +1,5 @@
 ActiveAdmin.register Movie do
-  permit_params :title, :discription, :genre_id, :avatar
+  permit_params :title, :discription, :rating, :genre_id, :avatar
 
   config.filters = false
 
@@ -14,7 +14,28 @@ ActiveAdmin.register Movie do
 
     column :title
     column :discription
-    column :genre_id
+    column "Rating" do |movie|
+      if movie.average_rating.present?
+          "⭐" * movie.average_rating.to_i
+
+        else
+         "No rating"
+        end
+      end
+
+    column "Reviews" do |movie|
+      if movie.reviews.any?
+         movie.reviews.last.body
+        else
+          "No Review"
+        end
+      end
+
+    column "Genre" do |movie|
+      movie.genre&.name || "No Genre"
+    end
+
+
     column :created_at
 
     column "Poster" do |movie|
@@ -32,7 +53,18 @@ ActiveAdmin.register Movie do
     attributes_table do
       row :title
       row :discription
-      row :genre_id
+      row "Rating" do |movie|
+        if movie.average_rating.present?
+          "⭐" * movie.average_rating.to_i
+          else
+            "No rating"
+          end
+        end
+
+      row "Genre" do |moive|
+        movie.genre&.name || "No Genre"
+      end
+
 
       row "Poster" do |movie|
         if movie.avatar.attached?
@@ -51,7 +83,7 @@ ActiveAdmin.register Movie do
     f.inputs do
       f.input :title
       f.input :discription
-      f.input :genre_id
+      f.input :genre, as: :select, collection: Genre.all.map { |g| [g.name, g.id] }
       f.input :avatar, as: :file
     end
     f.actions

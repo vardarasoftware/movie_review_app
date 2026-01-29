@@ -2,6 +2,9 @@ class Rating < ApplicationRecord
   belongs_to :movie
   belongs_to :user
 
+  validates :rating, presence: true, inclusion: { in: 1..5 }
+  validates :user_id, uniqueness: { scope: :movie_id }
+
   def self.ransackable_attributes(auth_object = nil)
     [
       "id",

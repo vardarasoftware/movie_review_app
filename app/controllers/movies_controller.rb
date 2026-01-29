@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+    before_action :authenticate_user!
 
   def index
     @movies = Movie.all
@@ -6,6 +7,8 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @rating = current_user&.ratings&.find_by(movie: @movie) || Rating.new
+    @review = current_user&.reviews&.find_by(movie: @movie) || Review.new
     #@rating = @moive.rating
   end
 
