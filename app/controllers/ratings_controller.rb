@@ -1,4 +1,5 @@
 class RatingsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @ratings = Rating.all
   end
@@ -10,15 +11,28 @@ class RatingsController < ApplicationController
   def new
     @rating = Rating.new
   end
-  
+
   def create
-    @rating = Rating.new(rating_params)
-    if @rating.save
-      redirect_to @rating, notice: "Rating created successfully."
+  @movie = Movie.find(params[:movie_id])
+
+  rating = @movie.ratings.find_or_initialize_by(user: current_user)
+  rating.rating = params[:rating][:rating]
+
+    if rating.save
+      redirect_to @movie, notice: "Rating saved"
     else
-      render :new
+      redirect_to @movie, alert: "Invalid rating"
     end
   end
+  
+  # def create
+  #   @rating = Rating.new(rating_params)
+  #   if @rating.save
+  #     redirect_to @rating, notice: "Rating created successfully."
+  #   else
+  #     render :new
+  #   end
+  #end
 
   def edit
     @rating = Rating.find(params[:id])

@@ -74,20 +74,6 @@
           <% end %>
         </td>
 
-        <td>
-          <%= link_to "Show", movie %>
-        </td>
-
-        <td>
-          <%= link_to "Edit", edit_movie_path(movie) %>
-        </td>
-
-        <td>
-          <%= link_to "Delete", movie,
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-        </td>
-
-
       </tr>
     <% end %>
   </tbody>

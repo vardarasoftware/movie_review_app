@@ -14,10 +14,76 @@
     <%=@movie.discription%><br>
 
     <strong>Genre :</strong>
-    <%=@movie.genre_id%><br>
+    <%= @movie.genre&.name || "No genre" %>
+
 
     <div>
-    <strong>Rating :<strong>
-    <%= @movie.rating&.rating || "Not rated yet" %>
+        <strong>Ratings :</strong>
+        <% if @movie.average_rating.present? %>
+          <%= "⭐" * @movie.average_rating.to_i %>
+        <% else %>
+          Not rated yet
+        <% end %>
+    </div>
+
+    <div>
+      <h3>All Reviews</h3>
+      <% @movie.reviews.each do |review| %>
+        <p>
+          <strong><%= review.user.name %>:</strong>
+          <%= review.body %>
+
+          <% if user_signed_in? && review.user == current_user %>
+            <%= link_to "Delete",
+                  movie_review_path(@movie, review),
+                  data: { turbo_method: :delete, turbo_confirm: "Delete review?" } %>
+          <% end %>
+        </p>
+      <% end %>
+
+    </div>
+
+
+    <div>
+      <h3>Give Rating</h3>
+
+      <% if user_signed_in? %>
+
+        <%= form_with model: Rating.new,
+              url: movie_ratings_path(@movie),
+              method: :post,
+              local: true do |f| %>
+
+          <div style="font-size:28px;">
+            <% (1..5).each do |star| %>
+              <label>
+                <%= f.radio_button :rating, star, style: "display:none;" %>
+                <span style="cursor:pointer;">⭐</span>
+              </label>
+            <% end %>
+          </div>
+
+          <br>
+
+          <%= f.submit "Submit Rating" %>
+
+        <% end %>
+
+      <% else %>
+        <p>Please login to rate this movie.</p>
+      <% end %>
+
+    </div>
+
+    <div>
+      <h3>Write Review</h3>
+      <% if user_signed_in? %>
+        <%= form_with model: Review.new, url: movie_reviews_path(@movie), local: true do |f| %>
+          <%= f.text_area :body %>
+          <%= f.submit "Submit Review" %>
+        <% end %>
+      <% else %>
+        <p>Please login to write review.</p>
+      <% end %>
     </div>
     <%= link_to "Back", movies_path%>

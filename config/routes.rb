@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
+  get 'homes/index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   #resources :admins
   resources :genres
-  resources :ratings
-  resources :comments
-  resources :movies
+  #resources :ratings
+  #resources :reviews
+  resources :movies do
+    resources :ratings, only: [:create, :update, :destroy]
+    resources :reviews, only: [:create, :update, :destroy]
+  end
   #resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -13,7 +17,8 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
   devise_for :users
-  root "movies#index"
+  #root "movies#index"
+  root "homes#index"
 
   # Defines the root path route ("/")
   # root "posts#index"

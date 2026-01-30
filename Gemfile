@@ -14,6 +14,7 @@ gem "devise"
 # Add activeadmin gem for admin dashboard
 gem "activeadmin"
 gem "sassc-rails"
+gem "activeadmin_addons"
 
 #Image_processing get
 gem "image_processing", "~> 1.2"
