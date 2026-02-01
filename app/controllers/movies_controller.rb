@@ -2,7 +2,9 @@ class MoviesController < ApplicationController
     before_action :authenticate_user!
 
   def index
-    @movies = Movie.all
+    @q = Movie.ransack(params[:q])
+    @movies = @q.result
+    #@movies = Movie.all
   end
 
   def show
