@@ -1,12 +1,25 @@
 ActiveAdmin.register Movie do
   permit_params :title, :discription, :rating, :genre_id, :avatar
 
-  config.filters = false
+  config.filters = true
 
   # REQUIRED for ActiveStorage images
   controller do
     include Rails.application.routes.url_helpers
   end
+
+  filter :genre
+  filter :ratings_rating_gteq,
+       as: :select,
+       label: "Minimum Rating",
+       collection: [
+         ["⭐ 1+", 1],
+         ["⭐ 2+", 2],
+         ["⭐ 3+", 3],
+         ["⭐ 4+", 4],
+         ["⭐ 5", 5]
+       ]
+ # filter :ratings_rating, as: :numeric, label: "Rating"
 
   index do
     selectable_column
