@@ -4,6 +4,10 @@ class MoviesController < ApplicationController
   def index
     @q = Movie.ransack(params[:q])
     @movies = @q.result
+    @pagy, @records = pagy(@q.result(distinct: true)) # :offset paginator
+
+    #@pagy, @movies = pagy(@q.result(distinct: true))
+
     #@pagy, @movies = pagy(@q.result(distinct: true), items: 10)
 
   #   @pagy, @movies = pagy(
