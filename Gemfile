@@ -5,6 +5,9 @@ ruby "3.2.4"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.5", ">= 7.1.5.1"
 
+#This gem i use for dummy date
+gem "faker"
+
 #This gem i use for pagination
 gem "pagy"
 
