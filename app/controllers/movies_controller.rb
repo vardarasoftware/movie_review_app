@@ -4,6 +4,11 @@ class MoviesController < ApplicationController
   def index
     @q = Movie.ransack(params[:q])
     @movies = @q.result
+    #@pagy, @movies = pagy(@q.result(distinct: true), items: 10)
+
+  #   @pagy, @movies = pagy(
+  #   @q.result(distinct: true) 
+  # )
     #@movies = Movie.all
   end
 

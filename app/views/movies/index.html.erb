@@ -4,6 +4,27 @@
   <%= f.submit "Search" %>
 <% end %>
 
+<%= search_form_for @q, method: :get do |f| %>
+
+  <%= f.label :genre_id_eq, "Genre" %><br>
+  <%= f.select :genre_id_eq,
+      Genre.pluck(:name, :id),
+      include_blank: "All Genres" %>
+
+  <br><br>
+
+  <%= f.label :ratings_rating_gteq, "Minimum Rating" %><br>
+  <%= f.select :ratings_rating_gteq,
+      [["1 ⭐", 1], ["2 ⭐", 2], ["3 ⭐", 3], ["4 ⭐", 4], ["5 ⭐", 5]],
+      include_blank: "Any Rating" %>
+
+  <br><br>
+
+  <%= f.submit "Apply Filters" %>
+
+<% end %>
+
+
 <div>
   <div>
      Movie Review App
@@ -42,6 +63,7 @@
       <th>Description</th>
       <th>Rating</th>
       <th>Latest Review</th>
+      <th>Genre</th>
       <th>Poster</th>
     </tr>
   </thead>
@@ -73,6 +95,9 @@
         </td>
 
         <td>
+          <%= movie.genre&.name%>
+
+        <td>
           <% if movie.avatar.attached? %>
             <%= image_tag movie.avatar.variant(resize_to_limit: [110, 110]) %>
           <% else %>
@@ -95,6 +120,7 @@
 
 
       </tr>
+
     <% end %>
   </tbody>
 </table>

@@ -24,7 +24,8 @@ class Movie < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     [
       "comments",
-      "rating"
+      "ratings",
+      "genre"
     ]
   end
 end
