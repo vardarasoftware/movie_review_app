@@ -2,29 +2,17 @@
   <%= f.label :title_cont, "Movie name" %>
   <%= f.search_field :title_cont %>
   <%= f.submit "Search" %>
+
+
+  <%= f.label :genre_id_eq, "Genre" %>
+  <%= f.select :genre_id_eq, Genre.pluck(:name, :id), include_blank: "All Genres" %>
+  <%= f.submit %>
+
+
+  <%= f.label :ratings_rating_gteq, "Minimum Rating"%>
+  <%= f.select :ratings_rating_gteq, (1..5).map { |n| [n, n] }, include_blank: "Any Rating" %>
+  <%= f.submit %>
 <% end %>
-
-<%= search_form_for @q, method: :get do |f| %>
-
-  <%= f.label :genre_id_eq, "Genre" %><br>
-  <%= f.select :genre_id_eq,
-      Genre.pluck(:name, :id),
-      include_blank: "All Genres" %>
-
-  <br><br>
-
-  <%= f.label :ratings_rating_gteq, "Minimum Rating" %><br>
-  <%= f.select :ratings_rating_gteq,
-      [["1 ⭐", 1], ["2 ⭐", 2], ["3 ⭐", 3], ["4 ⭐", 4], ["5 ⭐", 5]],
-      include_blank: "Any Rating" %>
-
-  <br><br>
-
-  <%= f.submit "Apply Filters" %>
-
-<% end %>
-
-
 <div>
   <div>
      Movie Review App
@@ -38,16 +26,17 @@
         <strong><%= current_user.name %></strong>
       </span>
 
-      <%= link_to "Logout",
+      <br><%= link_to " Log-out ",
           destroy_user_session_path,
           data: { turbo_method: :delete } %>
 
     <% else %>
 
       <%= link_to "Sign Up", new_user_registration_path %>
-      <%= link_to "Login", new_user_session_path %>
+      <%= link_to " Login ", new_user_session_path %>
 
     <% end %>
+    <br><%= link_to "  My Profile  ", current_user%>
   </div>
 </div>
 
@@ -117,11 +106,11 @@
           <%= link_to "Delete", movie,
                 data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
         </td>
-
-
       </tr>
 
     <% end %>
-    <%== @pagy.series_nav %> <!-- pagy style -->
   </tbody>
 </table>
+<div>
+  <%== @pagy.series_nav %>
+</div>

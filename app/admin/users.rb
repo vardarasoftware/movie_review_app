@@ -2,7 +2,13 @@ ActiveAdmin.register User do
   permit_params :name, :email, :password, :password_confirmation 
 
   # ❌ disable automatic filters
-  config.filters = false
+  config.filters = true
+
+  filter :name_or_email_cont, label: "Search (Name or Email)"
+
+
+  # filter :name
+  # filter :email
 
   index do
     selectable_column

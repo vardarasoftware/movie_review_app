@@ -3,24 +3,14 @@ class MoviesController < ApplicationController
 
   def index
     @q = Movie.ransack(params[:q])
-    @movies = @q.result
-    @pagy, @records = pagy(@q.result(distinct: true)) # :offset paginator
-
-    #@pagy, @movies = pagy(@q.result(distinct: true))
-
-    #@pagy, @movies = pagy(@q.result(distinct: true), items: 10)
-
-  #   @pagy, @movies = pagy(
-  #   @q.result(distinct: true) 
-  # )
-    #@movies = Movie.all
-  end
+    @movies = @q.result(distinct: true).includes(:ratings).page(params[:page])
+    @pagy, @movies = pagy(@movies, limit: 5)
+end
 
   def show
     @movie = Movie.find(params[:id])
     @rating = current_user&.ratings&.find_by(movie: @movie) || Rating.new
     @review = current_user&.reviews&.find_by(movie: @movie) || Review.new
-    #@rating = @moive.rating
   end
 
   def new
