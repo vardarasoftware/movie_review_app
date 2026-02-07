@@ -29,7 +29,6 @@ ActiveAdmin.register Movie do
     id_column
 
     column :title
-    column :discription
     column "Rating" do |movie|
       if movie.average_rating.present?
           "⭐" * movie.average_rating.to_i

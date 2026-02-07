@@ -3,9 +3,16 @@ class MoviesController < ApplicationController
 
   def index
     @q = Movie.ransack(params[:q])
-    @movies = @q.result(distinct: true).includes(:ratings).page(params[:page])
-    @pagy, @movies = pagy(@movies, limit: 5)
-end
+    @movies = @q.result(distinct: true)
+                .includes(:ratings, :genre)
+                .page(params[:page])
+  #end
+
+#   def index
+#     @q = Movie.ransack(params[:q])
+#     @movies = @q.result(distinct: true).includes(:ratings).page(params[:page])
+     @pagy, @movies = pagy(:offset, @movies, limit: 5)
+  end
 
   def show
     @movie = Movie.find(params[:id])

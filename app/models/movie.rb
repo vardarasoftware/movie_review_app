@@ -8,6 +8,18 @@ class Movie < ApplicationRecord
     ratings.average(:rating)&.round(1)
   end
 
+  scope :with_min_rating, ->(min = nil) {
+    return all if min.blank?
+
+    joins(:ratings)
+      .group("movies.id")
+      .having("AVG(ratings.rating) >= ?", min.to_f)
+  }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    [:with_min_rating]
+  end
+
   #REQUIRED FOR ACTIVEADMIN / RANSACK
   def self.ransackable_attributes(auth_object = nil)
     [

@@ -14,30 +14,32 @@
   <body>
     <% if notice.present? %>
 
-  <p style="
-    background:#dcfce7;
-    color:#166534;
-    padding:12px 18px;
-    border-radius:6px;
-    margin-bottom:15px;
-    font-family:Arial;
-    border:1px solid #86efac;
-  ">
+  <p class="signin">
     <%= notice %>
   </p>
 <% end %>
 
+<nav class="navbar">
+  <div class="navbar-left">
+    <span class="brand"> Movie Review App</span>
+  </div>
+
+  <div class="navbar-right">
+    <% if user_signed_in? %>
+      <%= link_to "Logout",
+        destroy_user_session_path,
+        data: { turbo_method: :delete },
+        class: "nav-link logout-link" %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "nav-link signup-link" %>
+    <% end %>
+  </div>
+</nav>
+
 <% if alert.present? %>
 
-  <p style="
-    background:#fee2e2;
-    color:#991b1b;
-    padding:12px 18px;
-    border-radius:6px;
-    margin-bottom:15px;
-    font-family:Arial;
-    border:1px solid #fca5a5;
-  ">
+  <p class="signout">
     <%= alert %>
   </p>
 <% end %>

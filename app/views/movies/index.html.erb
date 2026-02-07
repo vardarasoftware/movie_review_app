@@ -1,116 +1,109 @@
-<%= search_form_for @q do |f| %>
-  <%= f.label :title_cont, "Movie name" %>
-  <%= f.search_field :title_cont %>
-  <%= f.submit "Search" %>
+<div class="page-container">
+  <!-- Search / Filter Bar -->
+  <div class="filters">
+    <%= search_form_for @q, html: { class: "filters-form" } do |f| %>
+      <div class="filter-group">
+        <%= f.label :title_cont, "Movie name", class: "filter-label" %>
+        <%= f.search_field :title_cont, class: "filter-input", placeholder: "Search by title..." %>
+      </div>
 
+      <div class="filter-group">
+        <%= f.label :genre_id_eq, "Genre", class: "filter-label" %>
+        <%= f.select :genre_id_eq, Genre.pluck(:name, :id), { include_blank: "All Genres" }, class: "filter-select" %>
+      </div>
 
-  <%= f.label :genre_id_eq, "Genre" %>
-  <%= f.select :genre_id_eq, Genre.pluck(:name, :id), include_blank: "All Genres" %>
-  <%= f.submit %>
+      <div class="filter-group">
+        <%= f.label :with_min_rating, "Minimum Rating", class: "filter-label" %>
+        <%= f.select :with_min_rating, (1..5).map { |n| [n, n] }, { include_blank: "Any Rating" }, class: "filter-select" %>
+      </div>
 
-
-  <%= f.label :ratings_rating_gteq, "Minimum Rating"%>
-  <%= f.select :ratings_rating_gteq, (1..5).map { |n| [n, n] }, include_blank: "Any Rating" %>
-  <%= f.submit %>
-<% end %>
-<div>
-  <div>
-     Movie Review App
+      <div class="filter-actions">
+        <%= f.submit "Search", class: "btn btn-primary" %>
+        <%= f.submit "Apply Filters", class: "btn btn-secondary" %>
+      </div>
+    <% end %>
   </div>
 
-  <div>
-    <% if user_signed_in? %>
-
-      <span>
-        Welcome,
-        <strong><%= current_user.name %></strong>
-      </span>
-
-      <br><%= link_to " Log-out ",
-          destroy_user_session_path,
-          data: { turbo_method: :delete } %>
-
-    <% else %>
-
-      <%= link_to "Sign Up", new_user_registration_path %>
-      <%= link_to " Login ", new_user_session_path %>
-
-    <% end %>
-    <br><%= link_to "  My Profile  ", current_user%>
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-user">
+      <% if user_signed_in? %>
+        <span class="welcome-text">
+          Welcome, <strong><%= current_user.name %></strong>
+        </span>
+        <%= link_to "My Profile", current_user, class: "btn btn-outline" %>
+      <% else %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-outline" %>
+      <% end %>
+    </div>
   </div>
-</div>
 
-<hr>
+  <hr class="divider">
 
-<h1>Movies</h1>
+  <h1 class="page-title">Movies</h1>
 
+  <!-- Movies Table -->
+  <div class="table-wrapper">
+    <table class="movies-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Rating</th>
+          <th>Latest Review</th>
+          <th>Genre</th>
+          <th>Poster</th>
+          <th colspan="3" class="th-actions">Actions</th>
+        </tr>
+      </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Rating</th>
-      <th>Latest Review</th>
-      <th>Genre</th>
-      <th>Poster</th>
-    </tr>
-  </thead>
+      <tbody>
+        <% @movies.each do |movie| %>
+          <tr class="movie-row">
 
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
+            <td class="movie-title"><%= movie.title %></td>
 
-        <td>
-          <%= movie.title %>
-        </td>
+            <td class="movie-description"><%= movie.description %></td>
 
-        <td>
-          <%= movie.description %>
-        </td>
+            <td class="movie-rating">
+              <% if movie.average_rating.present? %>
+                <span class="rating-stars"><%= "⭐" * movie.average_rating.to_i %></span>
+              <% else %>
+                <span class="no-rating">No rating</span>
+              <% end %>
+            </td>
 
-        <td>
-          <% if movie.average_rating.present? %>
-            <%= "⭐" * movie.average_rating.to_i %>
-          <% else %>
-            No rating
-          <% end %>
-        </td>
-        </td>
+            <td class="movie-review">
+              <%= movie.reviews.last&.body || "No comments yet" %>
+            </td>
 
+            <td class="movie-genre"><%= movie.genre&.name || "—" %></td>
 
-        <td>
-          <%= movie.reviews.last&.body || "No comments yet" %>
-        </td>
+            <td class="movie-poster">
+              <% if movie.avatar.attached? %>
+                <%= image_tag movie.avatar.variant(resize_to_limit: [90, 90]), class: "poster-img" %>
+              <% else %>
+                <span class="no-image">No Image</span>
+              <% end %>
+            </td>
 
-        <td>
-          <%= movie.genre&.name%>
-
-        <td>
-          <% if movie.avatar.attached? %>
-            <%= image_tag movie.avatar.variant(resize_to_limit: [110, 110]) %>
-          <% else %>
-            No Image
-          <% end %>
-        </td>
-
-        <td>
-          <%= link_to "Show", movie %>
-        </td>
-
-        <td>
-          <%= link_to "Edit", edit_movie_path(movie) %>
-        </td>
-
-        <td>
-          <%= link_to "Delete", movie,
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-        </td>
-      </tr>
-
-    <% end %>
-  </tbody>
-</table>
+            <td><%= link_to "Show", movie, class: "action-link show-link" %></td>
+            <td><%= link_to "Edit", edit_movie_path(movie), class: "action-link edit-link" %></td>
+            <td>
+              <%= link_to "Delete", movie,
+                    data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                    class: "action-link delete-link" %>
+            </td>
+          </tr>
+        <% end %>
+        <%= link_to "＋ New Movie", new_movie_path, class: "new-movie-btn" %>
+      </tbody>
+    </table>
+  </div>
+  <!-- Pagination -->
+  <div class="pagination-wrapper">
+    <%== @pagy.info_tag %>
+    <%== @pagy.series_nav %> 
+  </div>
 <div>
-  <%== @pagy.series_nav %>
-</div>
