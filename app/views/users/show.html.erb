@@ -1,11 +1,66 @@
-<h1>User Details<h1>
-    <p>
-        <strong>Name</strong>
-        <%=@user.name%>
-    </p>
-    <p>
-        <strong>Email</strong>
-        <%=@user.email%>
-    </p>
-    <%= link_to "Back", users_path%>
-    
+<h1>User Details</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<%= link_to "Edit", edit_user_path(@user)%>
+<br>
+<hr>
+
+<h2>All Reviews by <%= @user.name || "User" %></h2>
+
+<% if @reviews.present? %>
+  <ul>
+    <% @reviews.each do |review| %>
+      <li>
+        <strong>Movie:</strong> <%= review.movie.title %><br>
+        <strong>Review:</strong> <%= review.body %>
+
+        <% if user_signed_in? && review.user == current_user %>
+          <br>
+          <%= link_to "Delete",
+                movie_review_path(review.movie, review),
+                data: { turbo_method: :delete, turbo_confirm: "Delete review?" } %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No reviews yet.</p>
+<% end %>
+
+<hr>
+
+<h2>All Ratings by <%= @user.name || "User" %></h2>
+
+<% if @ratings.present? %>
+  <ul>
+    <% @ratings.each do |rating| %>
+      <li>
+        <strong>Movie:</strong> <%= rating.movie.title %><br>
+        <strong>Rating:</strong> <%= "⭐" * rating.rating.to_i %>
+
+        <% if user_signed_in? && rating.user == current_user %>
+          <br>
+          <%= link_to "Delete",
+                movie_rating_path(rating.movie, rating),
+                data: { turbo_method: :delete, turbo_confirm: "Delete review?" } %>
+        <% end %>
+
+
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No ratings yet.</p>
+<% end %>
+
+<br>
+
+<%= link_to "Back", users_path %>

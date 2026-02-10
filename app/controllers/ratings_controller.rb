@@ -50,7 +50,9 @@ class RatingsController < ApplicationController
   def destroy
     @rating = Rating.find(params[:id])
     @rating.destroy
-    redirect_to ratings_path, notice: "Rating deleted successfully"
+    redirect_back fallback_location: user_path(current_user), notice: "Rating deleted successfully"
+
+    #redirect_to ratings_path, notice: "Rating deleted successfully"
   end
   
   private

@@ -6,6 +6,10 @@ class Rating < ApplicationRecord
   validates :user_id, uniqueness: { scope: :movie_id }
 
   def self.ransackable_attributes(auth_object = nil)
+    %w[rating]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
     [
       "id",
       "rating",

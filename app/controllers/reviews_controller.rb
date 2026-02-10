@@ -52,10 +52,17 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = Review.find(params[:id])
+    @review = current_user.reviews.find(params[:id])
     @review.destroy
-    redirect_to movies_path, notice: "Comment deleted successfully"
+    redirect_back fallback_location: user_path(current_user), notice: "Comment deleted successfully"
   end
+
+
+  # def destroy
+  #   @review = Review.find(params[:id])
+  #   @review.destroy
+  #   redirect_to movies_path, notice: "Comment deleted successfully"
+  # end
   
   private
   def review_path

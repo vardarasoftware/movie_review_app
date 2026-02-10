@@ -2,7 +2,10 @@ ActiveAdmin.register Rating do
   permit_params :rating, :user_id, :movie_id, :created_at, :updated_at
 
   # ❌ disable automatic filters
-  config.filters = false
+  config.filters = true
+
+  filter :rating_cont, label: "Search (rating)"
+
 
   index do
     selectable_column

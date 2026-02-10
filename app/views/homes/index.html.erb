@@ -1,80 +1,54 @@
-<div>
-  <div>
-     Movie Review App
-  </div>
+<div class="nikil">
+  <hr class="divider">
 
-  <div>
-    <% if user_signed_in? %>
+  <%= link_to "Movies", movies_path, class: "page-title" %>
 
-      <span>
-        Welcome,
-        <strong><%= current_user.name %></strong>
-      </span>
-
-      <%= link_to "Logout",
-          destroy_user_session_path,
-          data: { turbo_method: :delete } %>
-
-    <% else %>
-
-      <%= link_to "Sign Up", new_user_registration_path %>
-      <%= link_to "Login", new_user_session_path %>
-
-    <% end %>
-  </div>
-</div>
-
-<hr>
-
-<h1>Movies</h1>
-
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Rating</th>
-      <th>Latest Review</th>
-      <th>Poster</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @movies.each do |movie| %>
+  <table class="movies-table">
+    <thead>
       <tr>
-
-        <td>
-          <%= movie.title %>
-        </td>
-
-        <td>
-          <%= movie.discription %>
-        </td>
-
-        <td>
-          <% if movie.average_rating.present? %>
-            <%= "⭐" * movie.average_rating.to_i %>
-          <% else %>
-            No rating
-          <% end %>
-        </td>
-        </td>
-
-
-        <td>
-          <%= movie.reviews.last&.body || "No comments yet" %>
-        </td>
-
-        <td>
-          <% if movie.avatar.attached? %>
-            <%= image_tag movie.avatar.variant(resize_to_limit: [110, 110]) %>
-          <% else %>
-            No Image
-          <% end %>
-        </td>
-
+        <th class="th-title">Title</th>
+        <th class="th-description">Description</th>
+        <th class="th-rating">Rating</th>
+        <th class="th-review">Latest Review</th>
+        <th class="th-poster">Poster</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @movies.each do |movie| %>
+        <tr class="movie-row">
+
+          <td class="movie-title">
+            <%= movie.title %>
+          </td>
+
+          <td class="movie-description">
+            <%= movie.description %>
+          </td>
+
+          <td class="movie-rating">
+            <% if movie.average_rating.present? %>
+              <span class="rating-stars">
+                <%= "⭐" * movie.average_rating.to_i %>
+              </span>
+            <% else %>
+              <span class="no-rating">No rating</span>
+            <% end %>
+          </td>
+
+          <td class="movie-review">
+            <%= movie.reviews.last&.body || "No comments yet" %>
+          </td>
+
+          <td class="movie-poster">
+            <% if movie.avatar.attached? %>
+              <%= image_tag movie.avatar.variant(resize_to_limit: [110, 110]), class: "poster-img" %>
+            <% else %>
+              <span class="no-image">No Image</span>
+            <% end %>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

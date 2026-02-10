@@ -1,10 +1,15 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @q = User.ransack(params[:q])
+    @users = @q.result
+    @pagy, @users = pagy(@users, limit: 5)
+    #@users = User.all
   end
 
   def show
     @user = User.find(params[:id])
+    @reviews = @user.reviews
+    @ratings = @user.ratings
   end
 
   def new

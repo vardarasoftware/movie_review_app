@@ -3,6 +3,9 @@ ActiveAdmin.register Movie do
 
   config.filters = true
 
+  filter :title_cont, label: "Search (Title)"
+
+
   # REQUIRED for ActiveStorage images
   controller do
     include Rails.application.routes.url_helpers
@@ -26,7 +29,6 @@ ActiveAdmin.register Movie do
     id_column
 
     column :title
-    column :discription
     column "Rating" do |movie|
       if movie.average_rating.present?
           "⭐" * movie.average_rating.to_i
