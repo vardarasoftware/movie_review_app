@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_03_102352) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_10_100917) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -99,6 +99,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_03_102352) do
     t.datetime "updated_at", null: false
     t.integer "genre_id"
     t.integer "rating_id"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -139,6 +141,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_03_102352) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "movies"
   add_foreign_key "comments", "users"
+  add_foreign_key "movies", "users"
   add_foreign_key "ratings", "movies"
   add_foreign_key "ratings", "users"
   add_foreign_key "reviews", "movies"

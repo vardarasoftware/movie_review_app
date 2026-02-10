@@ -25,13 +25,30 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = Movie.new(movie_params)
-    if @movie.save
-      redirect_to @movie, notice: "Movie created successfully."
-    else
-      render :new
+    @movie = current_user.movies.new(movie_params)
+
+    respond_to do |format|
+      if @movie.save
+        # Tell the UserMailer to send a welcome email after save
+        MovieMailer.with(movie: @movie).new_movie_email.deliver_later
+
+        format.html { redirect_to movie_url(@movie), notice: "New Movie Added Successful." }
+        format.json { render :show, status: :created, location: @movie }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @movie.errors, status: :unprocessable_entity }
+      end
     end
   end
+
+  # def create
+  #   @movie = Movie.new(movie_params)
+  #   if @movie.save
+  #     redirect_to @movie, notice: "Movie created successfully."
+  #   else
+  #     render :new
+  #   end
+  # end
 
   def edit
     @movie = Movie.find(params[:id])
@@ -58,7 +75,7 @@ class MoviesController < ApplicationController
   end
 
   def movie_params
-    params.require(:movie).permit(:title, :discription, :genre_id, :avatar)
+    params.require(:movie).permit(:title, :description, :genre_id, :avatar)
   end
 
 end
