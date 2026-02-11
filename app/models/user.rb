@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :movies
   validates :name, presence: true
+  after_save :SendWelcomeEmailJob
   def self.ransackable_attributes(auth_object = nil)
     [
       "id",
@@ -22,5 +23,8 @@ class User < ApplicationRecord
     [
 
     ]
+  end
+  def SendWelcomeEmailJob
+    SendWelcomeEmailJob.perform_later(self)
   end
 end
