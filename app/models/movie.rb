@@ -1,8 +1,12 @@
 class Movie < ApplicationRecord
   belongs_to :genre
+  belongs_to :user
   has_many :reviews, dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_one_attached :avatar
+
+  after_create_commit :notify_new_movie
+
 
   def average_rating
     ratings.average(:rating)&.round(1)
@@ -38,6 +42,10 @@ class Movie < ApplicationRecord
       "ratings",
       "genre"
     ]
+  end
+  private
+  def notify_new_movie
+    MovieMailer.with(movie: self).new_movie_email.deliver_later
   end
 end
 

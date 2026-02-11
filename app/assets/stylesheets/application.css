@@ -20,6 +20,7 @@
 
 /*This css i useing for layout page's navbar
 /* Navbar container */
+
 .signin {
    background-color: #0dfb68;
    height: 40px;
@@ -131,9 +132,10 @@
 
 /* Page */
 .page-title {
-  margin: 25px 0;
-  font-size: 38px;
-  color: rgb(9, 216, 64);
+  border-radius: 6px;
+  background-color: white;
+  font-size: 28px;
+  color: rgb(238, 11, 170);
 }
 
 /* Table */
@@ -262,6 +264,17 @@
 }
 
 /* Buttons */
+.btnn {
+  padding: 8px 15px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
 .btn {
   padding: 8px 14px;
   border-radius: 999px;

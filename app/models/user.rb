@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :ratings, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :movies
   validates :name, presence: true
   def self.ransackable_attributes(auth_object = nil)
     [

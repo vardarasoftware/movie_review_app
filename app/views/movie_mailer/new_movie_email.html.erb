@@ -1,0 +1,11 @@
+<h1>New Movie Added </h1>
+
+<p>
+  A new movie has been added to your platform.
+</p>
+
+<p>
+  <strong>Title:</strong> <%= @movie.title %><br>
+  <strong>Genre:</strong> <%= @movie.genre&.name || "N/A" %><br>
+  <strong>Description:</strong> <%= @movie.description %>
+</p>
