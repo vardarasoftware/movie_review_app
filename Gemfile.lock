@@ -244,6 +244,10 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.10-x86_64-linux-musl)
       racc (~> 1.4)
+    open-uri (0.5.0)
+      stringio
+      time
+      uri
     orm_adapter (0.5.0)
     pagy (43.2.8)
       json
@@ -353,12 +357,15 @@ GEM
     stringio (3.1.7)
     thor (1.4.0)
     tilt (2.7.0)
+    time (0.4.2)
+      date
     timeout (0.4.3)
     turbo-rails (2.0.16)
       actionpack (>= 7.1.0)
       railties (>= 7.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uri (1.1.1)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -402,11 +409,13 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   letter_opener
+  open-uri
   pagy
   puma (>= 5.0)
   rails (~> 7.1.5, >= 7.1.5.1)
   ransack
   sassc-rails
+  securerandom
   selenium-webdriver
   sprockets-rails
   sqlite3 (>= 1.4)
