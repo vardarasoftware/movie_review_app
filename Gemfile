@@ -7,6 +7,12 @@ ruby "3.2.4"
 #add new gem letter_opner for mails
 gem "letter_opener", group: :development
 
+#for creating random new images for movies poster
+gem "open-uri"
+
+#for seed file and random date
+gem 'securerandom'
+
 gem "rails", "~> 7.1.5", ">= 7.1.5.1"
 
 #This gem i use for dummy date
