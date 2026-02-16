@@ -1,107 +1,77 @@
 <div class="page-container">
-  <!-- Search / Filter Bar -->
-  <div class="filters">
-    <%= search_form_for @q, html: { class: "filters-form" } do |f| %>
-      <div class="filter-group">
-        <%= f.label :title_cont, "Movie name", class: "filter-label" %>
-        <%= f.search_field :title_cont, class: "filter-input", placeholder: "Search by title..." %>
-      </div>
+   <!-- Search / Filter Bar -->
+    <div class="filters">
+       <%= search_form_for @q, html: { class: "filters-form" } do |f| %>
+        <div class="filter-group">
+           <%= f.label :title_cont, "Movie name", class: "filter-label" %>
+           <%= f.search_field :title_cont, class: "filter-input", placeholder: "Search by title..." %>
+        </div> <div class="filter-group"> <%= f.label :genre_id_eq, "Genre", class: "filter-label" %>
+          <%= f.select :genre_id_eq, Genre.pluck(:name, :id), { include_blank: "All Genres" }, class: "filter-select" %>
+           </div>
+            <div class="filter-group"> <%= f.label :with_min_rating, "Minimum Rating", class: "filter-label" %>
+            <%= f.select :with_min_rating, (1..5).map { |n| [n, n] }, { include_blank: "Any Rating" }, class: "filter-select" %>
+            </div> <div class="filter-actions"> <%= f.submit "Search", class: "btn btn-primary" %>
+              <%= f.submit "Apply Filters", class: "btn btn-secondary" %>
+ </div> 
+        <% end %> </div>
 
-      <div class="filter-group">
-        <%= f.label :genre_id_eq, "Genre", class: "filter-label" %>
-        <%= f.select :genre_id_eq, Genre.pluck(:name, :id), { include_blank: "All Genres" }, class: "filter-select" %>
-      </div>
 
-      <div class="filter-group">
-        <%= f.label :with_min_rating, "Minimum Rating", class: "filter-label" %>
-        <%= f.select :with_min_rating, (1..5).map { |n| [n, n] }, { include_blank: "Any Rating" }, class: "filter-select" %>
-      </div>
 
-      <div class="filter-actions">
-        <%= f.submit "Search", class: "btn btn-primary" %>
-        <%= f.submit "Apply Filters", class: "btn btn-secondary" %>
-      </div>
-    <% end %>
-  </div>
-  <!-- Page Header -->
-  <div class="page-header">
-    <div class="page-user">
-      <% if user_signed_in? %>
-        <span class="welcome-text">
-          Welcome, <strong><%= current_user.name %></strong>
-        </span>
-        <%#= link_to "My Profile", current_user, class: "btn btn-outline" %>
-      <% else %>
-        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
-        <%= link_to "Login", new_user_session_path, class: "btn btn-outline" %>
-      <% end %>
-    </div>
-  </div>
-  <hr class="divider">
+<div class="movies-grid">
+  <% @movies.each do |movie| %>
+    <div class="movie-card">
 
-  <h1 class="page-title">Movies</h1>
-
-  <!-- Movies Table -->
-  <div class="table-wrapper">
-    <table class="movies-table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Rating</th>
-          <th>Latest Review</th>
-          <th>Genre</th>
-          <th>Poster</th>
-          <th colspan="3" class="th-actions">Actions</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @movies.each do |movie| %>
-          <tr class="movie-row">
-
-            <td class="movie-title"><%= movie.title %></td>
-
-            <td class="movie-description"><%= movie.description %></td>
-
-            <td class="movie-rating">
-              <% if movie.average_rating.present? %>
-                <span class="rating-stars"><%= "⭐" * movie.average_rating.to_i %></span>
-              <% else %>
-                <span class="no-rating">No rating</span>
-              <% end %>
-            </td>
-
-            <td class="movie-review">
-              <%= movie.reviews.last&.body || "No comments yet" %>
-            </td>
-
-            <td class="movie-genre"><%= movie.genre&.name || "—" %></td>
-
-            <td class="movie-poster">
-              <% if movie.avatar.attached? %>
-                <%= image_tag movie.avatar.variant(resize_to_limit: [90, 90]), class: "poster-img" %>
-              <% else %>
-                <span class="no-image">No Image</span>
-              <% end %>
-            </td>
-
-            <td><%= link_to "Show", movie, class: "action-link show-link" %></td>
-            <td><%= link_to "Edit", edit_movie_path(movie), class: "action-link edit-link" %></td>
-            <td>
-              <%= link_to "Delete", movie,
-                    data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                    class: "action-link delete-link" %>
-            </td>
-          </tr>
+      <div class="card-poster">
+        <% if movie.avatar.attached? %>
+          <%= image_tag movie.avatar.variant(resize_to_limit: [220, 220]), class: "card-poster-img" %>
+        <% else %>
+          <div class="card-no-image">No Image</div>
         <% end %>
-        <%= link_to "＋ New Movie", new_movie_path, class: "new-movie-btn" %>
-      </tbody>
-    </table>
-  </div>
-  <!-- Pagination -->
-  <div class="pagination-wrapper">
-    <%== @pagy.info_tag %>
-    <%== @pagy.series_nav %> 
-  </div>
-<div>
+      </div>
+
+      <div class="card-body">
+        <h3 class="card-title"><%= movie.title %></h3>
+
+        <p class="card-genre"><%= movie.genre&.name || "No genre" %></p>
+
+        <p class="card-description">
+          <%= truncate(movie.description, length: 90) %>
+        </p>
+
+        <div class="card-rating">
+          <% if movie.average_rating.present? %>
+            <span class="rating-stars"><%= "⭐" * movie.average_rating.to_i %></span>
+            <span class="rating-text">(<%= movie.average_rating.round(1) %>/5)</span>
+          <% else %>
+            <span class="no-rating">Not rated</span>
+          <% end %>
+        </div>
+
+        <p class="card-review">
+          <strong>Latest review:</strong>
+          <%= truncate(movie.reviews.last&.body || "No comments yet", length: 80) %>
+        </p>
+      </div>
+
+      <!-- 3-Dots Actions -->
+      <div class="card-actions">
+        <details class="action-menu">
+          <summary class="dots-btn">⋮</summary>
+          <div class="action-dropdown">
+            <%= link_to "Show", movie, class: "dropdown-item" %>
+            <%= link_to "Edit", edit_movie_path(movie), class: "dropdown-item" %>
+            <%= link_to "Delete", movie,
+                  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                  class: "dropdown-item delete" %>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  <% end %>
+</div>
+
+<div class="new-movie-floating">
+  <%= link_to "＋ New Movie", new_movie_path, class: "new-movie-btn" %>
+</div>
+<div class="pagination-wrapper"> <%== @pagy.info_tag %> <%== @pagy.series_nav %> </div>

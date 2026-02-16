@@ -1,56 +1,45 @@
-<div class="nikil">
+<div class="homeindex">
   <hr class="divider">
 
-  <%#  <%= link_to "Movies", movies_path, class: "page-title" %>
-  <div>
-    <h1>Movies</h1>
+  <div class="home-header">
+    <h1 class="page-title">Movies</h1>
   </div>
-  <table class="movies-table">
-    <thead>
-      <tr>
-        <th class="th-title">Title</th>
-        <th class="th-description">Description</th>
-        <th class="th-rating">Rating</th>
-        <th class="th-review">Latest Review</th>
-        <th class="th-poster">Poster</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @movies.each do |movie| %>
-        <tr class="movie-row">
 
-          <td class="movie-title">
-            <%= movie.title %>
-          </td>
+  <div class="movies-grid">
+    <% @movies.each do |movie| %>
+      <div class="movie-card">
 
-          <td class="movie-description">
-            <%= movie.description %>
-          </td>
+        <div class="card-poster">
+          <% if movie.avatar.attached? %>
+            <%= image_tag movie.avatar.variant(resize_to_limit: [240, 240]), class: "card-poster-img" %>
+          <% else %>
+            <div class="card-no-image">No Image</div>
+          <% end %>
+        </div>
 
-          <td class="movie-rating">
+        <div class="card-body">
+          <h3 class="card-title"><%= movie.title %></h3>
+
+          <p class="card-description">
+            <%= truncate(movie.description, length: 100) %>
+          </p>
+
+          <div class="card-rating">
             <% if movie.average_rating.present? %>
-              <span class="rating-stars">
-                <%= "⭐" * movie.average_rating.to_i %>
-              </span>
+              <span class="rating-stars"><%= "⭐" * movie.average_rating.to_i %></span>
+              <span class="rating-text">(<%= movie.average_rating.round(1) %>/5)</span>
             <% else %>
-              <span class="no-rating">No rating</span>
+              <span class="no-rating">Not rated</span>
             <% end %>
-          </td>
+          </div>
 
-          <td class="movie-review">
-            <%= movie.reviews.last&.body || "No comments yet" %>
-          </td>
+          <p class="card-review">
+            <strong>Latest review:</strong>
+            <%= truncate(movie.reviews.last&.body || "No comments yet", length: 80) %>
+          </p>
+        </div>
 
-          <td class="movie-poster">
-            <% if movie.avatar.attached? %>
-              <%= image_tag movie.avatar.variant(resize_to_limit: [110, 110]), class: "poster-img" %>
-            <% else %>
-              <span class="no-image">No Image</span>
-            <% end %>
-          </td>
-
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </div>
+    <% end %>
+  </div>
 </div>
