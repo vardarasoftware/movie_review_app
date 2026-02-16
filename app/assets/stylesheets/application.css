@@ -203,10 +203,36 @@
   border: none;
   border-top: 1px solid #e5e7eb;
 }
+
+.btnn {
+  padding: 8px 15px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+.btn-outline {
+  background: #ffffff;
+  border: 1px solid #2563eb;
+  color: #2563eb;
+}
 /*This Css i use for Movies index file
-/* Page Container */
+/* Page Container 
 .page-container {
-  max-width: 1500px;
   margin: 20px auto;
   padding: 16px;
   background: #ffffff;
@@ -214,7 +240,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-/* Filters */
+
 .filters {
   background: linear-gradient(180deg, #f8fafc, #eef2f7);
   padding: 14px;
@@ -263,7 +289,7 @@
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-/* Buttons */
+
 .btnn {
   padding: 8px 15px;
   border-radius: 999px;
@@ -309,7 +335,6 @@
   color: #2563eb;
 }
 
-/* Header */
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -327,10 +352,9 @@
   font-size: 26px;
   font-weight: 800;
   margin: 12px 0;
-  color: #7c3aed; /* purple accent like your screenshot */
+  color: #7c3aed;
 }
 
-/* Table */
 .table-wrapper {
   overflow-x: auto;
   margin-top: 12px;
@@ -339,7 +363,7 @@
 .movies-table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 10px; /* space between rows (card-like rows) */
+  border-spacing: 0 10px; 
 }
 
 .movies-table thead th {
@@ -387,7 +411,6 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* Actions */
 .action-link {
   display: inline-block;
   text-decoration: none;
@@ -412,22 +435,19 @@
   color: #991b1b;
 }
 
-/* Pagination */
 .pagination-wrapper {
   margin: 20px 0 8px;
   display: flex;
   justify-content: center;
 }
 
-/* Divider */
+ 
 .divider {
   margin: 16px 0;
   border: none;
   border-top: 1px solid #e5e7eb;
 }
 
-/* New movie button
-/* Floating New Movie Button */
 .new-movie-btn {
   position: fixed;
   right: 24px;
@@ -436,7 +456,7 @@
   background: linear-gradient(135deg, #22c55e, #16a34a);
   color: #ffffff;
   padding: 12px 18px;
-  border-radius: 999px; /* pill shape */
+  border-radius: 999px;
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
@@ -446,7 +466,6 @@
   z-index: 1000;
 }
 
-/* Hover & focus */
 .new-movie-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 28px rgba(34, 197, 94, 0.45);
@@ -458,8 +477,1087 @@
   box-shadow: 0 8px 16px rgba(34, 197, 94, 0.3);
 }
 
-/* Optional: icon style if you add one later */
 .new-movie-btn .icon {
   margin-right: 6px;
 }
+*/
+/* add css of rating in show file */
+/* Layout */
+.movie-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  background: #fafafa;
+}
 
+.movie-title {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.movie-poster {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.poster-image {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.no-poster {
+  color: #999;
+}
+
+.movie-info p {
+  margin: 6px 0;
+}
+
+.movie-text {
+  color: #333;
+}
+
+/* Rating summary */
+.movie-rating-summary {
+  margin: 12px 0;
+  font-size: 18px;
+}
+
+.rating-stars-display {
+  margin-left: 6px;
+}
+
+/* Reviews */
+.movie-reviews {
+  margin-top: 20px;
+}
+
+.review-item {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.review-user {
+  color: #222;
+}
+
+.review-body {
+  color: #444;
+}
+
+.review-delete {
+  margin-left: 10px;
+  color: #c0392b;
+  text-decoration: none;
+}
+
+.review-delete:hover {
+  text-decoration: underline;
+}
+
+/* Star rating UI */
+.rating-stars {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+  display: inline-flex;
+  font-size: 32px;
+  margin: 8px 0;
+}
+
+.rating-input {
+  display: none;
+}
+
+.rating-label {
+  color: #ccc;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s ease-in-out;
+}
+
+.rating-input:checked ~ .rating-label {
+  color: gold;
+}
+
+.rating-label:hover,
+.rating-label:hover ~ .rating-label {
+  color: gold;
+}
+
+/* Forms */
+.movie-rating-form,
+.movie-review-form {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.review-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.btn-submit {
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background: #1d4ed8;
+}
+
+.login-hint {
+  color: #666;
+  font-style: italic;
+}
+
+/* Back link */
+.movie-back {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #2563eb;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* hear i use css of 
+edit file of movies 
+*/
+/* Form Layout */
+.form-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.form-input-file {
+  width: 100%;
+}
+
+.form-actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-submit {
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background: #1d4ed8;
+}
+
+.back-link {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+
+/*this css is for movies
+new movie file
+
+*/
+/* Colorful card style */
+.colorful-card {
+  background: linear-gradient(135deg, #f0f7ff, #fff7ed);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* Inputs */
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #6366f1; /* indigo */
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+/* Textarea */
+.form-textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #2563eb);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #4f46e5, #1d4ed8);
+}
+
+/* Hint text */
+.form-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+
+/*
+hear is the code of movies index files css
+i try to improve overall ui
+
+
+*/
+/* Grid Layout */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Card */
+.movie-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+}
+
+/* Poster */
+.card-poster {
+  height: 220px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-no-image {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* Body */
+.card-body {
+  padding: 14px;
+}
+
+.card-title {
+  font-size: 18px;
+  margin: 0 0 4px;
+  color: #111827;
+}
+
+.card-genre {
+  font-size: 13px;
+  color: #6366f1;
+  font-weight: 600;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #4b5563;
+  margin: 6px 0;
+}
+
+.card-rating {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+.rating-text {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.card-review {
+  font-size: 13px;
+  color: #374151;
+  margin-top: 6px;
+}
+
+/* 3 Dots Menu */
+.card-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.action-menu summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 22px;
+  padding: 4px 8px;
+  border-radius: 50%;
+}
+
+.action-menu summary:hover {
+  background: #f3f4f6;
+}
+
+.action-dropdown {
+  position: absolute;
+  right: 0;
+  top: 28px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+  overflow: hidden;
+  z-index: 10;
+  min-width: 120px;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 14px;
+  color: #111827;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.dropdown-item:hover {
+  background: #f3f4f6;
+}
+
+.dropdown-item.delete {
+  color: #dc2626;
+}
+
+/* Hide default details marker */
+.action-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Floating New Movie Button */
+.new-movie-floating {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+}
+
+.new-movie-btn {
+  background: linear-gradient(135deg, #6366f1, #2563eb);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 10px 20px rgba(37,99,235,0.4);
+  font-weight: 600;
+}
+
+.new-movie-btn:hover {
+  opacity: 0.9;
+}
+
+
+/*
+this css 
+for home index 
+code
+*/
+/* Root container */
+.homeindex {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 12px;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 16px 0;
+}
+
+/* Title */
+.page-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #6366f1;
+  margin-bottom: 16px;
+}
+
+/* Grid Layout */
+.movies-grid {
+  max-width: 1200px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Card */
+.movie-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 30px rgba(0,0,0,0.12);
+}
+
+/* Poster */
+.card-poster {
+  height: 220px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-no-image {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* Body */
+.card-body {
+  padding: 14px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #4b5563;
+  margin: 6px 0;
+  line-height: 1.4;
+}
+
+/* Rating */
+.card-rating {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+.rating-text {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.no-rating {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Review */
+.card-review {
+  font-size: 13px;
+  color: #374151;
+  margin-top: 6px;
+}
+
+/* Responsive */
+@media (max-width: 770px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .card-poster {
+    height: 180px;
+  }
+}
+
+/*
+this css i  am use for 
+user show page
+
+
+*/
+/* Page container – use full width, no extra empty space */
+.user-page {
+  max-width: 1200px;   /* match your movies grid container */
+  width: 100%;
+  margin: 24px auto;  /* centered but wider */
+  padding: 16px 24px; /* reduce empty side space */
+}
+
+/* Titles */
+.user-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #6366f1;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 16px 0 10px;
+  color: #111827;
+}
+
+/* User card */
+.user-card {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+}
+
+.user-info p {
+  margin: 4px 0;
+}
+
+.user-text {
+  color: #1f2933;
+  font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #2563eb);
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(37,99,235,0.35);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 20px 0;
+}
+
+/* Lists
+.reviews-list,
+.ratings-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}*/
+.reviews-list,
+.ratings-list {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Cards */
+.review-card,
+.rating-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid #eef2f7;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.review-card:hover,
+.rating-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.1);
+}
+
+/* Text */
+.review-movie,
+.rating-movie {
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.review-body {
+  color: #374151;
+  font-size: 14px;
+}
+
+.rating-stars {
+  font-size: 18px;
+}
+
+/* Actions */
+.action-link {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.delete-link {
+  color: #dc2626;
+}
+
+.delete-link:hover {
+  text-decoration: underline;
+}
+
+/* Empty state */
+.empty-state {
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Footer */
+.page-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.back-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .user-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/*
+this css for edit user
+details
+
+
+*/
+/* Reusable Form Styles */
+.form-container {
+  max-width: 520px;
+  margin: 24px auto;
+  padding: 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.colorful-card {
+  background: linear-gradient(135deg, #f0f7ff, #fff7ed);
+}
+
+.form-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #6366f1;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #111827;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
+}
+
+.form-actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-submit {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #2563eb);
+}
+
+.btn-submit:hover {
+  opacity: 0.95;
+}
+
+.back-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/*
+this css for 
+users index page
+
+*/
+/* Users Page */
+.users-page {
+  max-width: 1100px;
+  margin: 20px auto;
+  padding: 12px;
+}
+
+/* Filters */
+.users-filters {
+  margin-bottom: 12px;
+}
+
+.filters-form {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+.filter-input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  min-width: 220px;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
+}
+
+/* Page Title */
+.page-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #6366f1;
+  margin: 12px 0;
+}
+
+/* Table */
+.users-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.users-table thead th {
+  text-align: left;
+  padding: 10px;
+  background: #eef2ff;
+  color: #3730a3;
+  border-radius: 6px;
+}
+
+.user-row {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.user-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.user-row td {
+  padding: 12px 10px;
+}
+
+.user-name {
+  font-weight: 700;
+  color: #111827;
+}
+
+.user-email {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+/* Actions */
+.user-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-link {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.show-link {
+  color: #2563eb;
+}
+
+.edit-link {
+  color: #16a34a;
+}
+
+.delete-link {
+  color: #dc2626;
+}
+
+/* Footer */
+.users-footer {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.new-user-btn {
+  box-shadow: 0 8px 16px rgba(37,99,235,0.35);
+}
+
+/* Pagination wrapper */
+.pagination-wrapper {
+  margin-top: 16px;
+}
+
+/*
+this css for 
+new user form
+page
+*/
+/* Reusable Form Styles (Users) */
+.form-container {
+  max-width: 520px;
+  margin: 24px auto;
+  padding: 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.colorful-card {
+  background: linear-gradient(135deg, #f0f7ff, #fff7ed);
+}
+
+.form-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #6366f1;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #111827;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
+}
+
+.form-actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-submit {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #2563eb);
+}
+
+.btn-submit:hover {
+  opacity: 0.95;
+}
+
+.back-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/*
+try to remove wite space for 
+root pages
+*/
+/* ===== FORCE FULL-WIDTH CONTENT ON USER PAGES ===== */
+
+/* Remove width limits from common layout wrappers */
+.container,
+.page-container,
+.main-container,
+.content,
+.content-wrapper,
+.wrapper {
+  max-width: none !important;
+  width: 100% !important;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* User page: full width */
+.user-page {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 24px !important;
+}
+
+/* Ensure grids stretch nicely */
+.reviews-list,
+.ratings-list {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+}
+
+/* Optional: reduce top whitespace */
+.user-title {
+  margin-top: 0;
+}

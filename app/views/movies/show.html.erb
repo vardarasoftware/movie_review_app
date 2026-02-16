@@ -1,89 +1,103 @@
-<h1>Movie Details</h1>
-    <p>
-        <strong>Poster:</strong><br>
-         <% if @movie.avatar.attached? %>
-         <%= image_tag @movie.avatar.variant(resize_to_limit: [300, 300]) %>
-         <% else %>
-         No image uploaded
-        <% end %>
-    </p>
-    <strong>Title :</strong>
-    <%=@movie.title%><br>
+<h1 class="movie-title">Movie Details</h1>
 
-    <strong>Discription :</strong>
-    <%=@movie.description%><br>
+<div class="movie-container">
 
-    <strong>Genre :</strong>
-    <%= @movie.genre&.name || "No genre" %>
+  <div class="movie-poster">
+    <strong>Poster:</strong><br>
+    <% if @movie.avatar.attached? %>
+      <%= image_tag @movie.avatar.variant(resize_to_limit: [300, 300]), class: "poster-image" %>
+    <% else %>
+      <span class="no-poster">No image uploaded</span>
+    <% end %>
+  </div>
+
+  <div class="movie-info">
+    <p><strong>Title:</strong> <span class="movie-text"><%= @movie.title %></span></p>
+    <p><strong>Description:</strong> <span class="movie-text"><%= @movie.description %></span></p>
+    <p><strong>Genre:</strong> <span class="movie-text"><%= @movie.genre&.name || "No genre" %></span></p>
+    <p><strong>Author:</strong> <span class="movie-text"><%= @movie.author %></span></p>
+    <p><strong>Writer:</strong> <span class="movie-text"><%= @movie.writer %></span></p>
+  </div>
 
 
-    <div>
-        <strong>Ratings :</strong>
-        <% if @movie.average_rating.present? %>
-          <%= "⭐" * @movie.average_rating.to_i %>
-        <% else %>
-          Not rated yet
-        <% end %>
-    </div>
+  <div class="card-rating">
+    <% if @movie.average_rating.present? %>
+      <span class="rating-stars"><%= "⭐" * @movie.average_rating.to_i %></span>
+      <span class="rating-text">(<%= @movie.average_rating.round(1) %>/5)</span>
+    <% else %>
+      <span class="no-rating">Not rated</span>
+    <% end %>
+  </div>
 
-    <div>
-      <h3>All Reviews</h3>
-      <% @movie.reviews.each do |review| %>
+  <%# <div class="movie-rating-summary">
+    <strong>Ratings:</strong>
+    <% if @movie.average_rating.present? 
+      <span class="rating-stars-display">
+        <%= "⭐" * @movie.average_rating.to_i 
+      </span>
+    <% else 
+      <span class="no-rating">Not rated yet</span>
+    <% end 
+  </div> %>
+
+  <div class="movie-reviews">
+    <h3>All Reviews</h3>
+    <% @movie.reviews.each do |review| %>
+      <div class="review-item">
         <p>
-          <strong><%= review.user.name %>:</strong>
-          <%= review.body %>
+          <strong class="review-user"><%= review.user.name %>:</strong>
+          <span class="review-body"><%= review.body %></span>
 
           <% if user_signed_in? && review.user == current_user %>
             <%= link_to "Delete",
                   movie_review_path(@movie, review),
-                  data: { turbo_method: :delete, turbo_confirm: "Delete review?" } %>
+                  data: { turbo_method: :delete, turbo_confirm: "Delete review?" },
+                  class: "review-delete" %>
           <% end %>
         </p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="movie-rating-form">
+    <h3>Give Rating</h3>
+
+    <% if user_signed_in? %>
+      <%= form_with model: Rating.new,
+            url: movie_ratings_path(@movie),
+            method: :post,
+            local: true do |f| %>
+
+        <div class="rating-stars">
+          <% (1..5).reverse_each do |star| %>
+            <%= f.radio_button :rating, star, id: "rating_#{star}", class: "rating-input" %>
+            <%= label_tag "rating_#{star}", "★", class: "rating-label" %>
+          <% end %>
+        </div>
+
+        <div class="rating-submit">
+          <%= f.submit "Submit Rating", class: "btn-submit" %>
+        </div>
       <% end %>
+    <% else %>
+      <p class="login-hint">Please login to rate this movie.</p>
+    <% end %>
+  </div>
 
-    </div>
-
-
-    <div>
-      <h3>Give Rating</h3>
-
-      <% if user_signed_in? %>
-
-        <%= form_with model: Rating.new,
-              url: movie_ratings_path(@movie),
-              method: :post,
-              local: true do |f| %>
-
-          <div style="font-size:28px;">
-            <% (1..5).each do |star| %>
-              <label>
-                <%= f.radio_button :rating, star, style: "display:none;" %>
-                <span style="cursor:pointer;">⭐</span>
-              </label>
-            <% end %>
-          </div>
-
-          <br>
-
-          <%= f.submit "Submit Rating" %>
-
-        <% end %>
-
-      <% else %>
-        <p>Please login to rate this movie.</p>
+  <div class="movie-review-form">
+    <h3>Write Review</h3>
+    <% if user_signed_in? %>
+      <%= form_with model: Review.new, url: movie_reviews_path(@movie), local: true do |f| %>
+        <%= f.text_area :body, class: "review-textarea", placeholder: "Write your review..." %>
+        <%= f.submit "Submit Review", class: "btn-submit" %>
       <% end %>
+    <% else %>
+      <p class="login-hint">Please login to write review.</p>
+    <% end %>
+  </div>
 
-    </div>
+  <div class="movie-back">
+    <%= link_to "Back", movies_path, class: "back-link" %>
+  </div>
 
-    <div>
-      <h3>Write Review</h3>
-      <% if user_signed_in? %>
-        <%= form_with model: Review.new, url: movie_reviews_path(@movie), local: true do |f| %>
-          <%= f.text_area :body %>
-          <%= f.submit "Submit Review" %>
-        <% end %>
-      <% else %>
-        <p>Please login to write review.</p>
-      <% end %>
-    </div>
-    <%= link_to "Back", movies_path%>
+</div>

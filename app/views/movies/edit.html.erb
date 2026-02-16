@@ -1,25 +1,42 @@
-<h1>Edit Movie<h1>
-<%= form_with model: @movie do |form|%>
-<div>
-    <%=form.label :Avatar%>
-    <%=form.file_field :avatar%>
+<h1 class="form-title">Edit Movie</h1>
+
+<div class="form-container">
+  <%= form_with model: @movie, local: true do |form| %>
+
+    <div class="form-group">
+      <%= form.label :avatar, class: "form-label" %>
+      <%= form.file_field :avatar, class: "form-input-file" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :title, class: "form-label" %>
+      <%= form.text_field :title, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_field :description, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :author, class: "form-label" %>
+      <%= form.text_field :author, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :writer, class: "form-label" %>
+      <%= form.text_field :writer, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :genre_id, "Genre", class: "form-label" %>
+      <%= form.collection_select :genre_id, Genre.all, :id, :name, { prompt: "Select Genre" }, { class: "form-select" } %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit "Update Movie", class: "btn-submit" %>
+      <%= link_to "Back", movies_path, class: "back-link" %>
+    </div>
+
+  <% end %>
 </div>
-<div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-</div>
-<div>
-    <%= form.label :discription %>
-    <%= form.text_field :discription%>
-</div>
-<div>
-    <%= form.label :genre %>
-    <%= form.text_field :genre_id%>
-</div>
-<div>
-    <%= form.label :rating %>
-    <%= form.number_field :rating, in: 1..5 %><br>
-</div>
-<%=form.submit "Update Movie"%><br>
-<%= link_to "Back", movies_path%>
-<%end%>
