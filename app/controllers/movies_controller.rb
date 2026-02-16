@@ -6,11 +6,6 @@ class MoviesController < ApplicationController
     @movies = @q.result(distinct: true)
                 .includes(:ratings, :genre)
                 .page(params[:page])
-  #end
-
-#   def index
-#     @q = Movie.ransack(params[:q])
-#     @movies = @q.result(distinct: true).includes(:ratings).page(params[:page])
      @pagy, @movies = pagy(:offset, @movies, limit: 5)
   end
 
@@ -29,14 +24,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.save
-        # Tell the UserMailer to send a welcome email after save
         MovieMailer.with(movie: @movie).new_movie_email.deliver_later
-
-        format.html { redirect_to movie_url(@movie), notice: "New Movie Added Successful." }
-        format.json { render :show, status: :created, location: @movie }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,7 +53,10 @@ class MoviesController < ApplicationController
 
   def destroy
     @movie = Movie.find(params[:id])
+    movie_title = @movie.title
+    user_id     = current_user.id
     @movie.destroy
+    MovieDeletedEmailJob.perform_later(movie_title, user_id)
     redirect_to movie_path, notice: "Movie deleted successfully"
   end
 
