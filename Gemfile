@@ -28,10 +28,11 @@ gem 'ransack'
 gem "sprockets-rails"
 
 # Add devise gem for user authentication
-gem "devise"
+
+gem "devise", "~> 4.9"
+gem "activeadmin", "~> 3.4"
 
 # Add activeadmin gem for admin dashboard
-gem "activeadmin"
 gem "sassc-rails"
 gem "activeadmin_addons"
 
@@ -95,3 +96,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+gem "sidekiq", "~> 7.3.9"
+gem "connection_pool", "< 3.0"
+gem "redis", ">= 5.0"

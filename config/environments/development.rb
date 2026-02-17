@@ -67,7 +67,7 @@ Rails.application.configure do
   config.active_job.verbose_enqueue_logs = true
 
   #development set-up for active job
-  config.active_job.queue_adapter = :async
+  config.active_job.queue_adapter = :sidekiq
   #config.solid_queue.connects_to = { database: { writing: :queue } }
 
 

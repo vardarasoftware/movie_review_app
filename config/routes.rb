@@ -1,4 +1,6 @@
+require "sidekiq/web"
 Rails.application.routes.draw do
+  mount Sidekiq::Web => "/sidekiq"
   get 'homes/index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

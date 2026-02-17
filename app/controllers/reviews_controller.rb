@@ -22,6 +22,7 @@ class ReviewsController < ApplicationController
     review.body = params[:review][:body]
 
     if review.save
+      ReviewJob.perform_async(review.id, current_user.id)
       redirect_to @movie, notice: "Review submitted successfully"
     else
       redirect_to @movie, alert: "Unable to submit review"
