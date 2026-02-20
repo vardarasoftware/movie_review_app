@@ -62,11 +62,11 @@ class MoviesController < ApplicationController
 
   private
   def movie_path
-    params.require(:moive).permit(:title, :body)
+    params.require(:moive).permit(:title, :body, :author, :writer)
   end
 
   def movie_params
-    params.require(:movie).permit(:title, :description, :genre_id, :avatar, :author, :writer)
+    params.require(:movie).permit(:title, :description, :genre_id,:author, :writer, :avatar)
   end
 
 end
