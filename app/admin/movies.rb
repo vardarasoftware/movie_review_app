@@ -1,9 +1,10 @@
 ActiveAdmin.register Movie do
-  permit_params :title, :discription, :rating, :genre_id, :avatar
+  permit_params :title, :description, :rating, :genre_id, :avatar, :author, :writer
 
   config.filters = true
 
   filter :title_cont, label: "Search (Title)"
+
 
 
   # REQUIRED for ActiveStorage images
@@ -50,6 +51,10 @@ ActiveAdmin.register Movie do
       movie.genre&.name || "No Genre"
     end
 
+    column :author
+
+    column :writer
+
 
     column :created_at
 
@@ -67,7 +72,7 @@ ActiveAdmin.register Movie do
   show do
     attributes_table do
       row :title
-      row :discription
+      row :description
       row "Rating" do |movie|
         if movie.average_rating.present?
           "⭐" * movie.average_rating.to_i
@@ -79,6 +84,9 @@ ActiveAdmin.register Movie do
       row "Genre" do |moive|
         movie.genre&.name || "No Genre"
       end
+
+      row :author
+      row :writer
 
 
       row "Poster" do |movie|
@@ -97,8 +105,10 @@ ActiveAdmin.register Movie do
   form do |f|
     f.inputs do
       f.input :title
-      f.input :discription
+      f.input :description
       f.input :genre, as: :select, collection: Genre.all.map { |g| [g.name, g.id] }
+      f.input :author
+      f.input :writer
       f.input :avatar, as: :file
     end
     f.actions

@@ -51,6 +51,9 @@
           <strong>Latest review:</strong>
           <%= truncate(movie.reviews.last&.body || "No comments yet", length: 80) %>
         </p>
+          <%= movie.author.presence || "Unknown" %>
+          <%= movie.writer.presence || "Unknown" %>
+
       </div>
 
       <!-- 3-Dots Actions -->

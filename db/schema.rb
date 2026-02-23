@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_13_074100) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_18_005310) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -86,6 +86,19 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_13_074100) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "imports", force: :cascade do |t|
+    t.string "filename"
+    t.float "size"
+    t.integer "file_type"
+    t.integer "status"
+    t.integer "total_rows"
+    t.datetime "start_at"
+    t.datetime "finished_at"
+    t.json "meta"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

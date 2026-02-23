@@ -30,7 +30,9 @@ class Movie < ApplicationRecord
       "id",
       "title",
       "description",
-      "genre_id",
+      "genre",
+      "author",
+      "writer",
       "created_at",
       "updated_at"
     ]

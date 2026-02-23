@@ -8,7 +8,7 @@ permit_params :name, :movie_id, :created_at, :updated_at
     selectable_column
     id_column
     column :name
-    column :movie_id
+    #column :movie_id
     column :created_at
     column :updated_at
     actions
