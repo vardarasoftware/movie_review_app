@@ -7,7 +7,9 @@ ActiveAdmin.register Import do
     selectable_column
     id_column
     column :filename
-    column :status
+    column :total_rows
+    column :start_at
+    column :finished_at
 
     column "CSV File" do |import|
       if import.file.attached?
