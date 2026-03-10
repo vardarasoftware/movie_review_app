@@ -1561,3 +1561,36 @@ root pages
 .user-title {
   margin-top: 0;
 }
+/* try to add css for google link botten */
+.google-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+
+  color: #f5f2f2;
+  background-color: #040404;
+
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.google-btn:hover {
+  background-color: #f7f8f8;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transform: translateY(-1px);
+}
+
+.google-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}

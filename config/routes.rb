@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'homes/index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   #resources :admins
   resources :genres
@@ -22,8 +22,13 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
   #root "movies#index"
+  #root "homes#new"
+  Rails.application.routes.draw do
   root "homes#index"
-
-  # Defines the root path route ("/")
-  # root "posts#index"
+  
+  # Match this to your controller method name 'omniauth'
+  post '/auth/:provider/callback', to: 'sessions#omniauth'
+  get '/auth/:provider/callback', to: 'sessions#omniauth' 
+  get '/auth/failure', to: redirect('/')
+end
 end

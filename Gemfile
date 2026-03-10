@@ -99,3 +99,9 @@ end
 gem "sidekiq", "~> 7.3.9"
 gem "connection_pool", "< 3.0"
 gem "redis", ">= 5.0"
+
+gem 'dotenv-rails'
+
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
